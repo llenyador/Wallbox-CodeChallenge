@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '13.0'
+
+target 'SharedUtilities_Example' do
+  pod 'SharedUtilities', :path => '../'
+
+  target 'SharedUtilities_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

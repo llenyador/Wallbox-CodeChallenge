@@ -1,0 +1,13 @@
+sourceryCommand: null
+SharedUtilities-Unit-SharedUtilitiesTests:
+  sources:
+    include:
+    - ./SharedUtilities/Classes
+    - ./../../Core/SharedUtilities/SharedUtilities/Classes
+  output: ./SharedUtilitiesTests/Mock.generated.swift
+  targets:
+  - SharedUtilities_Tests
+  testable:
+  - SharedUtilities
+  import:
+  - Combine

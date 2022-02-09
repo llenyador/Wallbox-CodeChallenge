@@ -1,0 +1,27 @@
+PODS:
+  - KeychainSwift (19.0.0)
+  - ReachabilitySwift (5.0.0)
+  - SharedUtilities (0.1.0):
+    - KeychainSwift
+    - ReachabilitySwift
+
+DEPENDENCIES:
+  - SharedUtilities (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - KeychainSwift
+    - ReachabilitySwift
+
+EXTERNAL SOURCES:
+  SharedUtilities:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  SharedUtilities: 7e2e3bd191feb16579f85aa0be8bec89cea04dbb
+
+PODFILE CHECKSUM: 4b67272a8fb2378eef74ef7d7a6ab4625fea2649
+
+COCOAPODS: 1.10.0

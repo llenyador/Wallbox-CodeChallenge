@@ -1,0 +1,9 @@
+use_frameworks!
+
+target 'CoreLayout_Example' do
+  pod 'CoreLayout', :path => '../'
+
+  target 'CoreLayout_Tests' do
+    inherit! :search_paths
+  end
+end
