@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '9.0'
+
+target 'EMSDomain_Example' do
+  pod 'EMSDomain', :path => '../'
+
+  target 'EMSDomain_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

@@ -1,0 +1,16 @@
+PODS:
+  - EMSDomain (0.1.0)
+
+DEPENDENCIES:
+  - EMSDomain (from `../`)
+
+EXTERNAL SOURCES:
+  EMSDomain:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  EMSDomain: b51d0deb72c2f69e8285f78eea797ec7dfe8df35
+
+PODFILE CHECKSUM: 11d331df4f70264e93bb08976ce62c41e95a606e
+
+COCOAPODS: 1.11.2
