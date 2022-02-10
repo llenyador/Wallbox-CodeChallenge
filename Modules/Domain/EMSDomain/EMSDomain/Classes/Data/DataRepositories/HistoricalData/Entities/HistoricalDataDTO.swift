@@ -7,17 +7,11 @@
 
 import SharedUtilities
 
-private let kDateFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ" // "2021-09-27T16:06:00+00:00"
-    return formatter
-}()
-
 struct HistoricalDataDTO: Decodable {
-    let buildingActivePower: Measurement<KiloWatt>
-    let gridActivePower: Measurement<KiloWatt>
-    let pvActivePower: Measurement<KiloWatt>
-    let quasarsActivePower: Measurement<KiloWatt>
+    let buildingActivePower: CustomMeasurement<KiloWatt>
+    let gridActivePower: CustomMeasurement<KiloWatt>
+    let pvActivePower: CustomMeasurement<KiloWatt>
+    let quasarsActivePower: CustomMeasurement<KiloWatt>
     let timestamp: Date
 
     enum CodingKeys: String, CodingKey {
@@ -35,6 +29,18 @@ struct HistoricalDataDTO: Decodable {
         gridActivePower = try container.decode(forKey: .gridActivePower)
         pvActivePower = try container.decode(forKey: .pvActivePower)
         quasarsActivePower = try container.decode(forKey: .quasarsActivePower)
-        timestamp = try container.decodeDate(kDateFormatter, forKey: .timestamp)
+        timestamp = try container.decodeDate(Constants.dateFormatter,
+                                             forKey: .timestamp)
+    }
+}
+
+// MARK: - Constants
+private extension HistoricalDataDTO {
+    enum Constants {
+        static let dateFormatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ" // "2021-09-27T16:06:00+00:00"
+            return formatter
+        }()
     }
 }

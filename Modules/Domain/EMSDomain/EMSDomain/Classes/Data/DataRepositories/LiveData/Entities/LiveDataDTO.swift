@@ -6,13 +6,13 @@
 //
 
 struct LiveDataDTO: Decodable {
-    let solarPower: Measurement<KiloWatt>
-    let quasarsPower: Measurement<KiloWatt>
-    let gridPower: Measurement<KiloWatt>
-    let buildingDemand: Measurement<KiloWatt>
+    let solarPower: CustomMeasurement<KiloWatt>
+    let quasarsPower: CustomMeasurement<KiloWatt>
+    let gridPower: CustomMeasurement<KiloWatt>
+    let buildingDemand: CustomMeasurement<KiloWatt>
     let systemSoc: Percentage
-    let totalEnergy: Measurement<KiloWattHour>
-    let currentEnergy: Measurement<KiloWattHour>
+    let totalEnergy: CustomMeasurement<KiloWattHour>
+    let currentEnergy: CustomMeasurement<KiloWattHour>
 
     enum CodingKeys: String, CodingKey {
         case solarPower = "solar_power"

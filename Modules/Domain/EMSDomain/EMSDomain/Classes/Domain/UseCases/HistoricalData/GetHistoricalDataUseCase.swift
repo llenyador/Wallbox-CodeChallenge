@@ -7,14 +7,6 @@
 
 import SharedUtilities
 
-public struct HistoricalData {
-    public let buildingActivePower: Measurement<KiloWatt>
-    public let gridActivePower: Measurement<KiloWatt>
-    public let pvActivePower: Measurement<KiloWatt>
-    public let quasarsActivePower: Measurement<KiloWatt>
-    public let timestamp: Date
-}
-
 // sourcery: AutoMockable
 public protocol GetHistoricalDataUseCaseProtocol {
     func execute() -> PublisherResult<[HistoricalData]>

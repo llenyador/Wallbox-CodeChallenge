@@ -9,17 +9,17 @@ import SharedUtilities
 
 extension KeyedDecodingContainer {
     func decode<V>(
-        _ measurementType: Measurement<V>.Type,
+        _ measurementType: CustomMeasurement<V>.Type,
         forKey key: KeyedDecodingContainer<K>.Key
-    ) throws -> Measurement<V> {
+    ) throws -> CustomMeasurement<V> {
         let doubleValue = try decode(Double.self, forKey: key)
         return .init(doubleValue)
     }
 
     func decode<V>(
         forKey key: KeyedDecodingContainer<K>.Key
-    ) throws -> Measurement<V> {
-        try decode(Measurement<V>.self, forKey: key)
+    ) throws -> CustomMeasurement<V> {
+        try decode(CustomMeasurement<V>.self, forKey: key)
     }
 
     func decodeDate(

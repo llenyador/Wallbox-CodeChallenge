@@ -26,6 +26,3 @@ extension GetLiveDataUseCase: GetLiveDataUseCaseProtocol {
         dataRepository.getLiveData()
     }
 }
-
-// MARK: Private methods
-private extension GetLiveDataUseCase {}

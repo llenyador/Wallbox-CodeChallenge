@@ -11,9 +11,9 @@ public protocol Product: UnitProtocol {
 }
 
 func *<Unit1, Unit2, Result>(
-    lhs: Measurement<Unit1>,
-    rhs: Measurement<Unit2>
-) -> Measurement<Result>
+    lhs: CustomMeasurement<Unit1>,
+    rhs: CustomMeasurement<Unit2>
+) -> CustomMeasurement<Result>
 where Result: Product,
 Result.Factor1.Family == Unit1.Family,
 Result.Factor2.Family == Unit2.Family
@@ -24,9 +24,9 @@ Result.Factor2.Family == Unit2.Family
 }
 
 func *<Unit1, Unit2, Result>(
-    lhs: Measurement<Unit2>,
-    rhs: Measurement<Unit1>
-) -> Measurement<Result>
+    lhs: CustomMeasurement<Unit2>,
+    rhs: CustomMeasurement<Unit1>
+) -> CustomMeasurement<Result>
 where Result: Product,
 Result.Factor1.Family == Unit1.Family,
 Result.Factor2.Family == Unit2.Family
