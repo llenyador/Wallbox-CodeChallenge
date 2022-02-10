@@ -7,12 +7,23 @@
 //
 
 import UIKit
+import EMSDomain
+import Combine
 
 class ViewController: UIViewController {
 
+    var cancellables: Set<AnyCancellable> = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let liveData: GetLiveDataUseCaseProtocol = EMSDomainFactory.build()
+        liveData.execute()
+            .sinkOnMain { liveData in
+                print(liveData)
+            } onFailure: { error in
+                print(error)
+            }.store(in: &cancellables)
     }
 
     override func didReceiveMemoryWarning() {

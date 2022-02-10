@@ -28,12 +28,12 @@ Pod::Spec.new do |s|
     'MockedData' => ['EMSDomain/MockedData/**/*.json']
   }
 
-  s.test_spec 'EMSDomainTests' do |test_spec|
-      test_spec.source_files = 'EMSDomainTests/**/*.{h,m,swift}'
-      test_spec.resource = 'EMSDomainTests/**/*.{json}'
-      test_spec.dependency 'SharedTestingUtilities'
-      test_spec.dependency 'SharedUtilitiesMocks'
-      test_spec.requires_app_host = true
-  end
+#  s.test_spec 'EMSDomainTests' do |test_spec|
+#      test_spec.source_files = 'EMSDomainTests/**/*.{h,m,swift}'
+#      test_spec.resource = 'EMSDomainTests/**/*.{json}'
+#      test_spec.dependency 'SharedTestingUtilities'
+#      test_spec.dependency 'SharedUtilitiesMocks'
+#      test_spec.requires_app_host = true
+#  end
 
 end
