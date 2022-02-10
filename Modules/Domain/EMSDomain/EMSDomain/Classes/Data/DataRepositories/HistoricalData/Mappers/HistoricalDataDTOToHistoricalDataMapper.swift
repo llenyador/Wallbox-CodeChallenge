@@ -9,6 +9,12 @@ import SharedUtilities
 
 enum HistoricalDataDTOToHistoricalDataMapper: MapperProtocol {
     static func map(_ input: HistoricalDataDTO) throws -> HistoricalData {
-        throw CustomError.mapping
+        .init(
+            buildingActivePower: input.buildingActivePower,
+            gridActivePower: input.gridActivePower,
+            pvActivePower: input.pvActivePower,
+            quasarsActivePower: input.quasarsActivePower,
+            timestamp: input.timestamp
+        )
     }
 }

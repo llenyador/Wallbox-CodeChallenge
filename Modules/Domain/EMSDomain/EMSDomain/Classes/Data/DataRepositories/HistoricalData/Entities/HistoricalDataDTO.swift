@@ -34,6 +34,20 @@ struct HistoricalDataDTO: Decodable {
     }
 }
 
+extension HistoricalDataDTO {
+    init(buildingActivePower: CustomMeasurement<KiloWatt>,
+         gridActivePower: CustomMeasurement<KiloWatt>,
+         pvActivePower: CustomMeasurement<KiloWatt>,
+         quasarsActivePower: CustomMeasurement<KiloWatt>,
+         timestamp: Date) {
+        self.buildingActivePower = buildingActivePower
+        self.gridActivePower = gridActivePower
+        self.pvActivePower = pvActivePower
+        self.quasarsActivePower = quasarsActivePower
+        self.timestamp = timestamp
+    }
+}
+
 // MARK: - Constants
 private extension HistoricalDataDTO {
     enum Constants {
