@@ -27,5 +27,5 @@ public enum KiloWattHour: UnitProtocol {
 // A KiloWattHour is the result of multiplying a KiloWatt by an Hour.
 extension KiloWattHour: Product {
     public typealias Factor1 = KiloWatt
-    public typealias Factor2 = Hours
+    public typealias Factor2 = Hour
 }
