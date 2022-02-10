@@ -35,3 +35,23 @@ struct LiveDataDTO: Decodable {
         currentEnergy = try container.decode(forKey: .currentEnergy)
     }
 }
+
+extension LiveDataDTO {
+    init(
+        solarPower: CustomMeasurement<KiloWatt>,
+        quasarsPower: CustomMeasurement<KiloWatt>,
+        gridPower: CustomMeasurement<KiloWatt>,
+        buildingDemand: CustomMeasurement<KiloWatt>,
+        systemSoc: Percentage,
+        totalEnergy: CustomMeasurement<KiloWattHour>,
+        currentEnergy: CustomMeasurement<KiloWattHour>
+    ) {
+        self.solarPower = solarPower
+        self.quasarsPower = quasarsPower
+        self.gridPower = gridPower
+        self.buildingDemand = buildingDemand
+        self.systemSoc = systemSoc
+        self.totalEnergy = totalEnergy
+        self.currentEnergy = currentEnergy
+    }
+}

@@ -37,6 +37,16 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6BBFB582B1FC39E8136755B9FB27574D"
+               BuildableName = "EMSDomain-Unit-EMSDomainTests.xctest"
+               BlueprintName = "EMSDomain-Unit-EMSDomainTests"
+               ReferencedContainer = "container:Pods/Pods.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
