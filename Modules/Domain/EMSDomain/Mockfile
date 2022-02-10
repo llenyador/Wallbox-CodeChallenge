@@ -1,0 +1,14 @@
+sourceryCommand: null
+EMSDomain-Unit-EMSDomainTests:
+  sources:
+    include:
+    - ./EMSDomain/Classes
+    - ./../../Core/SharedUtilities/SharedUtilities/Classes
+  output: ./EMSDomainTests/Mock.generated.swift
+  targets:
+  - EMSDomain_Tests
+  testable:
+  - EMSDomain
+  import:
+  - SharedUtilities
+  - Combine

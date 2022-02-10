@@ -1,0 +1,15 @@
+use_frameworks!
+
+platform :ios, '14.0'
+
+target 'EMSDomain_Example' do
+  pod 'EMSDomain', :path => '../', :testspecs => ['EMSDomainTests']
+
+  pod 'SharedUtilities', :path => '../../../Core/SharedUtilities'
+
+  target 'EMSDomain_Tests' do
+    inherit! :search_paths
+    pod 'SharedTestingUtilities', :path => '../../../Core/SharedUtilities'
+    pod 'SharedUtilitiesMocks', :path => '../../../Core/SharedUtilities'
+  end
+end
