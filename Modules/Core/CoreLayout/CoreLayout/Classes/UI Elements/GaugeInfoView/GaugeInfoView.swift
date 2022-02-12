@@ -120,21 +120,15 @@ private extension GaugeInfoView {
         gauge.reverse = style == .red
         switch style {
         case .white:
-            gauge.bgColor = .white.withAlphaComponent(0.4)
             gauge.startColor = .white
-            infoLabel.textColor = .white
-            valueLabel.textColor = .white
         case .primary:
-            gauge.bgColor = .primary.withAlphaComponent(0.4)
             gauge.startColor = .primary
-            infoLabel.textColor = .primary
-            valueLabel.textColor = .primary
         case .red:
-            gauge.bgColor = .red.withAlphaComponent(0.4)
             gauge.startColor = .red
-            infoLabel.textColor = .red
-            valueLabel.textColor = .red
         }
+        infoLabel.textColor = gauge.startColor
+        valueLabel.textColor = gauge.startColor
+        gauge.bgColor = gauge.startColor.withAlphaComponent(0.4)
     }
 }
 
