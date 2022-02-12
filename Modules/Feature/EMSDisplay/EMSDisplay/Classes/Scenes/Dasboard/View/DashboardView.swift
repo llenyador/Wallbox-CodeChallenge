@@ -13,6 +13,9 @@ final class DashboardView: UIView {
     let loadingView = Init(LoadingView(style: .ballPulseSyncPrimary)) {
         $0.displayAnimating(false)
     }
+    let errorLabel = Init(UILabel()) {
+        $0.textColor = .lightGray
+    }
     let scrollView = Init(UIScrollView()) {
         $0.showsVerticalScrollIndicator = false
         $0.alwaysBounceVertical = true
@@ -67,6 +70,7 @@ private extension DashboardView {
     func addSubviews() {
         addSubviews(
             loadingView,
+            errorLabel,
             scrollView
         )
         contentStackView.addArrangedSubviews(
@@ -77,6 +81,9 @@ private extension DashboardView {
 
     func setupConstraints() {
         loadingView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+        errorLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
         scrollView.snp.makeConstraints {

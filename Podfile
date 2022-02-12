@@ -15,9 +15,11 @@ def test_pods
 end
 
 def feature_pods
+  pod 'EMSDisplay', :path => 'Modules/Feature/EMSDisplay'
 end
 
 def domain_pods
+  pod 'EMSDomain', :path => 'Modules/Domain/EMSDomain'
 end
 
 def core_pods

@@ -17,9 +17,9 @@ public typealias Percentage = Double
 // With this method, you'll be able to emit errors at compile time.
 public struct LiveData {
     public let solarPower: CustomMeasurement<KiloWatt>
-    public let quasarsPower: CustomMeasurement<KiloWatt>
+    public let quasarsPowerStatus: QuasarPowerStatus
     public let gridPower: CustomMeasurement<KiloWatt>
-    public let buildingDemand: CustomMeasurement<KiloWatt>
+    public let buildingDemandPower: CustomMeasurement<KiloWatt>
     public let systemSoc: Percentage
     public let totalEnergy: CustomMeasurement<KiloWattHour>
     public let currentEnergy: CustomMeasurement<KiloWattHour>

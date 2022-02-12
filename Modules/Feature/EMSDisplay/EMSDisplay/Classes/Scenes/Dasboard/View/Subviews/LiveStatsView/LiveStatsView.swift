@@ -50,7 +50,7 @@ extension LiveStatsView {
         switch viewModel.state {
         case let .empty(message):
             emptyLabel.text = message
-        case let .gauges(gaugeVMs):
+        case let .displayGauges(gaugeVMs):
             displayGauges(for: gaugeVMs)
         }
     }
@@ -121,10 +121,6 @@ private extension LiveStatsView {
                 GaugeInfoView()
             ) {
                 $0.backgroundColor = .primary
-                $0.gauge.bgColor = .white.withAlphaComponent(0.4)
-                $0.gauge.startColor = .white
-                $0.infoLabel.textColor = .white
-                $0.valueLabel.textColor = .white
             }
 
             horizontalStack.addArrangedSubview(gauge)

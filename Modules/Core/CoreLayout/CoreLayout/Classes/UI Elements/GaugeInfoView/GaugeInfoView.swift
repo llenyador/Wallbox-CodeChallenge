@@ -55,13 +55,15 @@ public extension GaugeInfoView {
     func display(viewModel: GaugeInfoViewViewModel,
                  animateValueChange: Bool,
                  completion: (() -> Void)? = nil) {
+        display(viewModel.style)
         infoLabel.isHidden = viewModel.infoText.isEmpty
         topLabelConstraint.isActive = !infoLabel.isHidden
         bottomGaugeConstraint.isActive = !topLabelConstraint.isActive
         infoLabel.text = viewModel.infoText
         valueLabel.text = viewModel.valueText
         if animateValueChange {
-            gauge.animateRate(1, newValue: viewModel.value) { _ in
+            gauge.animateRate(Constants.gaugeAnimationDuration,
+                              newValue: viewModel.value) { _ in
                 if let completion = completion {
                     completion()
                 }
@@ -92,7 +94,8 @@ private extension GaugeInfoView {
         gauge.snp.makeConstraints {
             $0.width.equalToSuperview()
                 .priority(.required)
-            $0.aspectRatio(.squared(1), inView: gauge)
+            $0.aspectRatio(Constants.gaugeAspectRatio,
+                           inView: gauge)
             $0.left.top.right.equalToSuperview()
             bottomGaugeConstraint = $0.bottom.equalToSuperview()
                 .priority(.required)
@@ -112,11 +115,28 @@ private extension GaugeInfoView {
             $0.left.bottom.right.equalToSuperview()
         }
     }
+
+    func display(_ style: GaugeInfoViewViewModel.Style) {
+        gauge.reverse = style == .red
+        switch style {
+        case .white:
+            gauge.startColor = .white
+        case .primary:
+            gauge.startColor = .primary
+        case .red:
+            gauge.startColor = .red
+        }
+        infoLabel.textColor = gauge.startColor
+        valueLabel.textColor = gauge.startColor
+        gauge.bgColor = gauge.startColor.withAlphaComponent(0.4)
+    }
 }
 
 // MARK: - Constants
 private extension GaugeInfoView {
     enum Constants {
+        static let gaugeAnimationDuration: CGFloat = 1
         static let gaugeLineWidth: CGFloat = 16
+        static let gaugeAspectRatio: CGSize = .squared(1)
     }
 }

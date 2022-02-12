@@ -32,7 +32,7 @@ final class DashboardInteractor {
 // MARK: - DashboardInteractorProtocol
 extension DashboardInteractor: DashboardInteractorProtocol {
     func viewDidLoad() {
-        
+        getDashboardData()
     }
 
     func didTapLiveStatsView() {
@@ -41,4 +41,22 @@ extension DashboardInteractor: DashboardInteractorProtocol {
 }
 
 // MARK: - Private methods
-private extension DashboardInteractor {}
+private extension DashboardInteractor {
+    func getDashboardData() {
+        presenter.presentLoading()
+
+        worker.getLiveData()
+            .sinkOnMain { [weak self] data in
+                guard let self = self else {
+                    return
+                }
+                self.presenter.present(data: data)
+            } onFailure: { [weak self] error in
+                guard let self = self else {
+                    return
+                }
+                self.presenter.present(error: error)
+            }.store(in: &cancelables)
+
+    }
+}

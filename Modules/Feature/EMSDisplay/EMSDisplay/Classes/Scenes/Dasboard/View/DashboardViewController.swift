@@ -34,55 +34,6 @@ final class DashboardViewController: UIViewController {
         setupView()
         interactor.viewDidLoad()
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        display(state: .loading)
-        delay(0.5) {
-            let liveSessionVM = LiveSessionViewViewModel(
-                titleText: "Current session",
-                sourcePower1VM: .init(topText: "Solar power",
-                                      bottomText: "7.82 kW"),
-                sourcePower2VM: .init(topText: "Quasar power",
-                                      bottomText: "38.73 kW"),
-                sourcePower3VM: .init(topText: "Grid power",
-                                      bottomText: "80.48 kW"),
-                totalPowerVM: .init(topText: "Building total demand",
-                                    bottomText: "127.03 kW")
-            )
-            let liveStatsVM = LiveStatsViewViewModel(
-                titleText: "Current session stats",
-                state: .gauges(
-                    gaugeVMs: [
-                        .init(infoText: "Solar power",
-                              value: 0.1,
-                              valueText: "10%"),
-                        .init(infoText: "Quasar power",
-                              value: 0.3,
-                              valueText: "30%"),
-                        .init(infoText: "Quasar power",
-                              value: 0.6,
-                              valueText: "60%")
-                    ]
-                )
-            )
-            
-            
-            self.display(
-                state: .showData(
-                    .init(
-                        gaugeInfo: [
-                            .init(infoText: "Quasar charge",
-                                  value: 1,
-                                  valueText: "5 kWh")
-                        ],
-                        liveSessionVM: liveSessionVM,
-                        liveStatsVM: liveStatsVM
-                    )
-                )
-            )
-        }
-    }
 }
 
 // MARK: - DashboardViewControllerProtocol
@@ -92,10 +43,14 @@ extension DashboardViewController: DashboardViewControllerProtocol {
         switch state {
         case .loading:
             _view.scrollView.isHidden = true
+            _view.errorLabel.isHidden = true
         case let .error(message):
             _view.scrollView.isHidden = true
+            _view.errorLabel.isHidden = false
+            _view.errorLabel.text = message
         case let .showData(viewModel):
             _view.scrollView.isHidden = false
+            _view.errorLabel.isHidden = true
             _view.display(viewModel: viewModel)
         }
     }
@@ -111,7 +66,7 @@ extension DashboardViewController: DashboardViewDelegate {
 // MARK: - Setup methods
 private extension DashboardViewController {
     func setupView() {
-        title = "Dashboard"
+        title = "dashboard_title".localized
         _view.delegate = self
     }
 }

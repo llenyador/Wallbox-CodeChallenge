@@ -7,10 +7,7 @@
 //
 
 import CoreLayout
-import GaugeKit
 import SharedUtilities
-
-
 
 class ViewController: UIViewController {
 

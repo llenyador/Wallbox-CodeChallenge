@@ -13,13 +13,13 @@ struct LiveStatsViewViewModel: Equatable {
 
     enum State: Equatable {
         case empty(message: String)
-        case gauges(gaugeVMs: [GaugeInfoViewViewModel])
+        case displayGauges(gaugeVMs: [GaugeInfoViewViewModel])
 
         var isEmpty: Bool {
             switch self {
             case .empty:
                 return true
-            case .gauges:
+            case .displayGauges:
                 return false
             }
         }
