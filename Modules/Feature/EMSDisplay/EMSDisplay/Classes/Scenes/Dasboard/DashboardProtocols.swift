@@ -16,7 +16,9 @@ protocol DashboardViewDelegate: AnyObject {
 }
 
 // sourcery: AutoMockable
-protocol DashboardViewControllerProtocol: AnyObject {}
+protocol DashboardViewControllerProtocol: AnyObject {
+    func display(state: DashboardModels.ViewState)
+}
 
 // sourcery: AutoMockable
 protocol DashboardInteractorProtocol {
@@ -25,7 +27,11 @@ protocol DashboardInteractorProtocol {
 }
 
 // sourcery: AutoMockable
-protocol DashboardPresenterProtocol {}
+protocol DashboardPresenterProtocol {
+    func present(data: DashboardModels.Data)
+    func present(error: Error)
+    func presentLoading()
+}
 
 // sourcery: AutoMockable
 protocol DashboardRouterProtocol {
@@ -43,5 +49,24 @@ enum DashboardModels {
         let gaugeInfo: [GaugeInfoViewViewModel]
         let liveSessionVM: LiveSessionViewViewModel
         let liveStatsVM: LiveStatsViewViewModel
+    }
+}
+
+extension DashboardModels {
+    enum QuasarStatus {
+        case providingEnergy(PowerSource)
+        case consumingEnergy(CustomMeasurement<KiloWattHour>)
+    }
+
+    struct PowerSource {
+        let power: CustomMeasurement<KiloWatt>
+        let suppliedPercentage: Double
+    }
+
+    struct Data {
+        let quasarStatus: QuasarStatus
+        let solarPower: PowerSource
+        let gridPower: PowerSource
+        let buildingDemandPower: CustomMeasurement<KiloWatt>
     }
 }

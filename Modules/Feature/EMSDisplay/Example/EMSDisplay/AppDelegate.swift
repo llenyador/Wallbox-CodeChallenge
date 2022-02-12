@@ -8,6 +8,7 @@
 
 import UIKit
 import EMSDisplay
+import SharedUtilities
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+        SharedUtilitiesModule.initializeEnvironment {
+            true
+        }
         window = UIWindow()
         let initialVC = EMSDisplayFactory.buildDashboard()
         let navC = UINavigationController(rootViewController: initialVC)

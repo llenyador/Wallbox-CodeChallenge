@@ -20,4 +20,10 @@ public extension BinaryFloatingPoint {
     var floatValue: Float {
         Float(self)
     }
+
+    func round(toDecimals places: Int) -> Self {
+        let divisor = pow(10.0, Double(places))
+        let numerator = doubleValue * divisor
+        return Self(Foundation.round(numerator) / divisor)
+    }
 }

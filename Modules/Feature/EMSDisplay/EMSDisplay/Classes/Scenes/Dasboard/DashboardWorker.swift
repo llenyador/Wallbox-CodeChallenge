@@ -7,15 +7,92 @@
 //
 
 import Combine
+import EMSDomain
+import SharedUtilities
 
 // sourcery: AutoMockable
-protocol DashboardWorkerProtocol {}
+protocol DashboardWorkerProtocol {
+    func getLiveData() -> PublisherResult<DashboardModels.Data>
+}
 
 // MARK: - DashboardWorker
-struct DashboardWorker {}
+struct DashboardWorker {
+    private let getLiveDataUseCase: GetLiveDataUseCaseProtocol
+
+    init(
+        getLiveDataUseCase: GetLiveDataUseCaseProtocol
+    ) {
+        self.getLiveDataUseCase = getLiveDataUseCase
+    }
+}
 
 // MARK: - DashboardWorkerProtocol
-extension DashboardWorker: DashboardWorkerProtocol {}
+extension DashboardWorker: DashboardWorkerProtocol {
+    func getLiveData() -> PublisherResult<DashboardModels.Data> {
+        getLiveDataUseCase.execute()
+            .map {
+                mapToDashboardLiveData($0)
+            }.eraseToAnyPublisher()
+    }
+}
 
 // MARK: - Private methods
-private extension DashboardWorker {}
+private extension DashboardWorker {
+    func mapToDashboardLiveData(
+        _ liveData: LiveData
+    ) -> DashboardModels.Data {
+        
+        let solarPower = DashboardModels.PowerSource(
+            power: liveData.solarPower,
+            suppliedPercentage: percentageFor(
+                liveData.solarPower,
+                buildingDemandPower: liveData.buildingDemandPower
+            )
+        )
+        let gridPower = DashboardModels.PowerSource(
+            power: liveData.gridPower,
+            suppliedPercentage: percentageFor(
+                liveData.gridPower,
+                buildingDemandPower: liveData.buildingDemandPower
+            )
+        )
+
+        return .init(
+            quasarStatus: mapToQuasarsStatus(liveData),
+            solarPower: solarPower,
+            gridPower: gridPower,
+            buildingDemandPower: liveData.buildingDemandPower
+        )
+    }
+
+    func mapToQuasarsStatus(
+        _ liveData: LiveData
+    ) -> DashboardModels.QuasarStatus {
+        let quasarsPower = liveData.quasarsPowerStatus.power
+        let quasarEnergy = EnergyConversion.convertToKWh(quasarsPower)
+        switch liveData.quasarsPowerStatus {
+        case .providingEnergy:
+            let energySource = DashboardModels.PowerSource(
+                power: quasarsPower,
+                suppliedPercentage: percentageFor(
+                    quasarsPower,
+                    buildingDemandPower: liveData.buildingDemandPower
+                )
+            )
+            return .providingEnergy(energySource)
+            
+        case .consumingEnergy:
+            return .consumingEnergy(quasarEnergy)
+        }
+    }
+
+    func percentageFor(
+        _ power: CustomMeasurement<KiloWatt>,
+        buildingDemandPower: CustomMeasurement<KiloWatt>
+    ) -> Double {
+        (
+            (power.value / buildingDemandPower.value) * 100
+        ).round(toDecimals: 2)
+    }
+}
+

@@ -6,8 +6,8 @@
 //  Copyright (c) 2022 Aitor Salvador. All rights reserved.
 //
 
-import SwiftUI
 import CoreLayout
+import EMSDomain
 
 // MARK: - Setup
 
@@ -41,12 +41,15 @@ private extension DashboardFactory {
         viewController: DashboardViewControllerProtocol
     ) -> DashboardPresenterProtocol {
         DashboardPresenter(
-            viewController: viewController
+            viewController: viewController,
+            globalMessage: CoreLayoutFactory.build()
         )
     }
     
     static func build() -> DashboardWorkerProtocol {
-        DashboardWorker()
+        DashboardWorker(
+            getLiveDataUseCase: EMSDomainFactory.build()
+        )
     }
     
     static func build(
