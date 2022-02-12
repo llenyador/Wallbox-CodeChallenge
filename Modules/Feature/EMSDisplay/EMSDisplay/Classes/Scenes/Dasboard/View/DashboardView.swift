@@ -43,7 +43,10 @@ final class DashboardView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
 
+// MARK: - Public
+extension DashboardView {
     func display(viewModel: DashboardModels.ViewModel) {
         displayGauges(for: viewModel.gaugeInfo)
         liveSessionView.display(viewModel: viewModel.liveSessionVM)

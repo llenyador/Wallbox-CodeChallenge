@@ -40,6 +40,7 @@ final class LiveStatsView: UIView {
     }
 }
 
+// MARK: - Public methods
 extension LiveStatsView {
     func display(viewModel: LiveStatsViewViewModel) {
         titleLabel.text = viewModel.titleText
@@ -55,6 +56,7 @@ extension LiveStatsView {
     }
 }
 
+// MARK: - Private methods
 private extension LiveStatsView {
     func setupView() {
         backgroundColor = .primary
@@ -129,12 +131,5 @@ private extension LiveStatsView {
             gauge.display(viewModel: viewModel,
                           animateValueChange: true)
         }
-    }
-}
-
-// MARK: - Constants
-private extension LiveStatsView {
-    enum Constants {
-        static let gaugeLineWidth: CGFloat = 16
     }
 }

@@ -26,6 +26,7 @@ Pod::Spec.new do |s|
   s.dependency 'SnapKit', '5.0.1'
   s.dependency 'NVActivityIndicatorView', '5.1.1'
   s.dependency 'Nuke'
+  s.dependency 'GaugeKit'
 
   s.resource_bundles = {
     'Assets' => ['CoreLayout/Assets/Assets.xcassets']

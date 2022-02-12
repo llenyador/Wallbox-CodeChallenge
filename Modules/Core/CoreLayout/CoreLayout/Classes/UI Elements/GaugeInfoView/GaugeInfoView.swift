@@ -6,24 +6,23 @@
 //  Copyright © 2022 CocoaPods. All rights reserved.
 //
 
-import CoreLayout
 import GaugeKit
 import SharedUtilities
 
-final class GaugeInfoView: UIView {
+public final class GaugeInfoView: UIView {
     private let wrapperView = Init(UIView())
-    let gauge = Init(Gauge()) {
+    public let gauge = Init(Gauge()) {
         $0.maxValue = 1
         $0.rate = 0
         $0.startColor = .primary
         $0.bgColor = .lightGray
         $0.lineWidth = Constants.gaugeLineWidth
     }
-    let valueLabel = Init(UILabel()) {
+    public let valueLabel = Init(UILabel()) {
         $0.textColor = .black
         $0.textAlignment = .center
     }
-    let infoLabel = Init(UILabel()) {
+    public let infoLabel = Init(UILabel()) {
         $0.textColor = .black
         $0.textAlignment = .center
         $0.numberOfLines = 0
@@ -33,13 +32,13 @@ final class GaugeInfoView: UIView {
     private var topLabelConstraint: Constraint!
     private var bottomGaugeConstraint: Constraint!
 
-    init(insets: UIEdgeInsets) {
+    public init(insets: UIEdgeInsets) {
         self.insets = insets
         super.init(frame: .zero)
         setupView()
     }
 
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         insets = .zero
         super.init(frame: .zero)
         setupView()
@@ -49,7 +48,10 @@ final class GaugeInfoView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
 
+// MARK: - Public methods
+public extension GaugeInfoView {
     func display(viewModel: GaugeInfoViewViewModel,
                  animateValueChange: Bool,
                  completion: (() -> Void)? = nil) {
@@ -70,6 +72,7 @@ final class GaugeInfoView: UIView {
     }
 }
 
+// MARK: - Private methods
 private extension GaugeInfoView {
     func setupView() {
         backgroundColor = .white

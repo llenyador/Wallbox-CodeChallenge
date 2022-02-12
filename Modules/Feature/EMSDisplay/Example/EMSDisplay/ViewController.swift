@@ -13,19 +13,9 @@ import SharedUtilities
 
 
 class ViewController: UIViewController {
-//    let gauge = GaugeInfoView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.backgroundColor = .white
-//        view.addSubview(gauge)
-//        gauge.snp.makeConstraints {
-//            $0.center.equalToSuperview()
-//            $0.left.right.equalToSuperview().priority(.high)
-//            $0.width.lessThanOrEqualTo(200).priority(.required)
-//        }
-//        gauge.layer.borderWidth = 1
-//        gauge.layer.borderColor = UIColor.green.cgColor
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,10 +25,6 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        gauge.display(viewModel: .init(infoText: " HOLAAAA ",
-//                                       value: 0.5,
-//                                       valueText: "0.5 kWh"),
-//                      animateValueChange: true)
     }
 
 }

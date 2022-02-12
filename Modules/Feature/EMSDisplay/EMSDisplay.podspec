@@ -24,7 +24,6 @@ Pod::Spec.new do |s|
 
   s.dependency 'CoreLayout'
   s.dependency 'EMSDomain'
-  s.dependency 'GaugeKit'
 
 #  s.test_spec 'EMSDisplayTests' do |test_spec|
 #      test_spec.source_files = 'EMSDisplayTests/**/*.{h,m,swift}'

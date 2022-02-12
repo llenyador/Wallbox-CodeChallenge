@@ -104,7 +104,7 @@ extension DashboardViewController: DashboardViewControllerProtocol {
 // MARK: - DashboardViewControllerProtocol
 extension DashboardViewController: DashboardViewDelegate {
     func didTapLiveStatsView() {
-        
+        interactor.didTapLiveStatsView()
     }
 }
 

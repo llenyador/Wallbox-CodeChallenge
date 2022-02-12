@@ -60,6 +60,7 @@ final class LiveSessionView: UIView {
     }
 }
 
+// MARK: - Public methods
 extension LiveSessionView {
     func display(viewModel: LiveSessionViewViewModel) {
         titleLabel.text = viewModel.titleText
@@ -79,6 +80,7 @@ extension LiveSessionView {
     }
 }
 
+// MARK: - Private methods
 private extension LiveSessionView {
     func setupView() {
         backgroundColor = .primary

@@ -58,7 +58,5 @@ private extension VerticalLabelsStack {
             $0.left.bottom.right
                 .equalToSuperview()
         }
-        topLabel.setContentHuggingPriority(.required, for: .vertical)
-        topLabel.setContentHuggingPriority(.required, for: .horizontal)
     }
 }
