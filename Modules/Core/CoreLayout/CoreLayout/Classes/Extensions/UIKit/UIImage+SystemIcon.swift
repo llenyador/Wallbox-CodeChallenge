@@ -14,6 +14,7 @@ public extension UIImage {
     /// - Note: All symbols can be downloaded from [here](https://developer.apple.com/design/downloads/SF-Symbols.dmg)
     enum SystemIcon: String, CaseIterable {
         case arrowLeft = "arrow.left"
+        case arrowRight = "arrow.right"
         case gobackward10 = "gobackward.10"
         case goforward10 = "goforward.10"
         case listTriangle = "list.triangle"

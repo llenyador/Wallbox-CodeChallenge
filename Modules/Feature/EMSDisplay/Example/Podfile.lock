@@ -1,0 +1,66 @@
+PODS:
+  - CoreLayout (0.1.0):
+    - Nuke
+    - NVActivityIndicatorView (= 5.1.1)
+    - SharedUtilities
+    - SnapKit (= 5.0.1)
+    - SwiftMessages (= 9.0.5)
+  - EMSDisplay (0.1.0):
+    - CoreLayout
+    - EMSDomain
+    - GaugeKit
+  - EMSDomain (0.1.0):
+    - SharedUtilities
+  - GaugeKit (0.5.1)
+  - Nuke (10.6.1)
+  - NVActivityIndicatorView (5.1.1):
+    - NVActivityIndicatorView/Base (= 5.1.1)
+  - NVActivityIndicatorView/Base (5.1.1)
+  - ReachabilitySwift (5.0.0)
+  - SharedUtilities (0.1.0):
+    - ReachabilitySwift (= 5.0.0)
+  - SnapKit (5.0.1)
+  - SwiftMessages (9.0.5):
+    - SwiftMessages/App (= 9.0.5)
+  - SwiftMessages/App (9.0.5)
+
+DEPENDENCIES:
+  - CoreLayout (from `../../../Core/CoreLayout`)
+  - EMSDisplay (from `../`)
+  - EMSDomain (from `../../../Domain/EMSDomain`)
+  - SharedUtilities (from `../../../Core/SharedUtilities`)
+
+SPEC REPOS:
+  trunk:
+    - GaugeKit
+    - Nuke
+    - NVActivityIndicatorView
+    - ReachabilitySwift
+    - SnapKit
+    - SwiftMessages
+
+EXTERNAL SOURCES:
+  CoreLayout:
+    :path: "../../../Core/CoreLayout"
+  EMSDisplay:
+    :path: "../"
+  EMSDomain:
+    :path: "../../../Domain/EMSDomain"
+  SharedUtilities:
+    :path: "../../../Core/SharedUtilities"
+
+SPEC CHECKSUMS:
+  CoreLayout: c666d880eb77868ebeedf5fed51cc9996f0cd838
+  EMSDisplay: da076f21ad1c23c8422a10c16354fc3bf97528de
+  EMSDomain: 0d3bc41caccd3a6aa661e160b4229bf1c7efd0ba
+  GaugeKit: b09f41f141511c172a606403e71adf8e9b6008b3
+  Nuke: 3ca210aee6d90756605c5125cbe40569fd9c06f7
+  NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  SharedUtilities: 5d614f2fa88207d901026de9645f2c60f4bdd28d
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftMessages: 9cca50659fa22bb523b4dd2a958d4442e843a354
+
+PODFILE CHECKSUM: dd3b6354c9eccf5220b3cea7e7fcd677e2a7a12d
+
+COCOAPODS: 1.11.2
