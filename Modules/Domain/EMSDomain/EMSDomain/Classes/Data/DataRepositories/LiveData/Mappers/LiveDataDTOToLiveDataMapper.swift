@@ -14,7 +14,7 @@ enum LiveDataDTOToLiveDataMapper: MapperProtocol {
         if input.quasarsPower >= 0 {
             quasarStatus = .consumingEnergy(absoluteQuasarPower)
         } else {
-            quasarStatus = .providingEnergy(absoluteQuasarPower)
+            quasarStatus = .supplyingEnergy(absoluteQuasarPower)
         }
 
         return .init(

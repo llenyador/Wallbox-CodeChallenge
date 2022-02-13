@@ -6,12 +6,12 @@
 //
 
 public enum QuasarPowerStatus {
-    case providingEnergy(CustomMeasurement<KiloWatt>)
+    case supplyingEnergy(CustomMeasurement<KiloWatt>)
     case consumingEnergy(CustomMeasurement<KiloWatt>)
 
     public var power: CustomMeasurement<KiloWatt> {
         switch self {
-        case let .providingEnergy(power):
+        case let .supplyingEnergy(power):
             return power
         case let .consumingEnergy(power):
             return power

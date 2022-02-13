@@ -5,8 +5,6 @@
 //  Created by Aitor Salvador on 12/2/22.
 //
 
-import CoreLayout
-
 public final class VerticalLabelsStack: UIView {
     public let topLabel = Init(UILabel()) {
         $0.textColor = .white

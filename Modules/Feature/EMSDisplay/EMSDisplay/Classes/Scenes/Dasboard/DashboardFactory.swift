@@ -33,7 +33,8 @@ private extension DashboardFactory {
         DashboardInteractor(
             presenter: presenter,
             router: router,
-            worker: build()
+            worker: build(),
+            scheduler: DispatchQueue.main
         )
     }
     
