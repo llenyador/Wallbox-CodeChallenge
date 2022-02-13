@@ -12,14 +12,16 @@ def test_pods
   pod 'SwiftyMocky'
   pod 'SharedTestingUtilities', :path => 'Modules/Core/SharedUtilities'
   pod 'SharedUtilitiesMocks', :path => 'Modules/Core/SharedUtilities'
+  pod 'CoreLayoutMocks', :path => 'Modules/Core/CoreLayout'
+  pod 'EMSDomainMocks', :path => 'Modules/Domain/EMSDomain'
 end
 
 def feature_pods
-  pod 'EMSDisplay', :path => 'Modules/Feature/EMSDisplay'
+  pod 'EMSDisplay', :path => 'Modules/Feature/EMSDisplay', :testspecs => ['EMSDisplayTests']
 end
 
 def domain_pods
-  pod 'EMSDomain', :path => 'Modules/Domain/EMSDomain'
+  pod 'EMSDomain', :path => 'Modules/Domain/EMSDomain', :testspecs => ['EMSDomainTests']
 end
 
 def core_pods

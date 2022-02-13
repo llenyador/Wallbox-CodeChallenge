@@ -6,11 +6,29 @@ PODS:
     - SharedUtilities
     - SnapKit (= 5.0.1)
     - SwiftMessages (= 9.0.5)
+  - CoreLayoutMocks (0.1.0):
+    - CoreLayout
+    - SharedTestingUtilities
+    - SwiftyMocky (= 4.1.0)
   - EMSDisplay (0.1.0):
     - CoreLayout
     - EMSDomain
+  - EMSDisplay/EMSDisplayTests (0.1.0):
+    - CoreLayout
+    - CoreLayoutMocks
+    - EMSDomain
+    - EMSDomainMocks
+    - SharedTestingUtilities
+    - SwiftyMocky (= 4.1.0)
   - EMSDomain (0.1.0):
     - SharedUtilities
+  - EMSDomain/EMSDomainTests (0.1.0):
+    - SharedTestingUtilities
+    - SharedUtilities
+    - SharedUtilitiesMocks
+  - EMSDomainMocks (0.1.0):
+    - EMSDomain
+    - SharedTestingUtilities
   - GaugeKit (0.5.1)
   - Nuke (10.6.1)
   - NVActivityIndicatorView (5.1.1):
@@ -37,8 +55,12 @@ PODS:
 
 DEPENDENCIES:
   - CoreLayout (from `Modules/Core/CoreLayout`)
+  - CoreLayoutMocks (from `Modules/Core/CoreLayout`)
   - EMSDisplay (from `Modules/Feature/EMSDisplay`)
+  - EMSDisplay/EMSDisplayTests (from `Modules/Feature/EMSDisplay`)
   - EMSDomain (from `Modules/Domain/EMSDomain`)
+  - EMSDomain/EMSDomainTests (from `Modules/Domain/EMSDomain`)
+  - EMSDomainMocks (from `Modules/Domain/EMSDomain`)
   - SharedTestingUtilities (from `Modules/Core/SharedUtilities`)
   - SharedUtilities (from `Modules/Core/SharedUtilities`)
   - SharedUtilitiesMocks (from `Modules/Core/SharedUtilities`)
@@ -59,9 +81,13 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   CoreLayout:
     :path: Modules/Core/CoreLayout
+  CoreLayoutMocks:
+    :path: Modules/Core/CoreLayout
   EMSDisplay:
     :path: Modules/Feature/EMSDisplay
   EMSDomain:
+    :path: Modules/Domain/EMSDomain
+  EMSDomainMocks:
     :path: Modules/Domain/EMSDomain
   SharedTestingUtilities:
     :path: Modules/Core/SharedUtilities
@@ -72,13 +98,15 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   CoreLayout: f5d6d94c4aa4ad8fce2043a0c7e9cf4c414490fb
-  EMSDisplay: 8240fcf859ba10e21048a064a57b6819ed6718b8
+  CoreLayoutMocks: 1a022ba226cbd30ee80ad35cd119693fd3993efa
+  EMSDisplay: c64a5d8745c4df14e4c30c64f85e190e17891085
   EMSDomain: 0d3bc41caccd3a6aa661e160b4229bf1c7efd0ba
+  EMSDomainMocks: 6e23f48598d4c9b5180ec37bb7f277858a72ce4a
   GaugeKit: b09f41f141511c172a606403e71adf8e9b6008b3
   Nuke: 3ca210aee6d90756605c5125cbe40569fd9c06f7
   NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
-  SharedTestingUtilities: d5ee389a9bb9c612c50ae52a70758ee472b01816
+  SharedTestingUtilities: d92c1a26a07c3d925ddaa929d9d71618aefb3a0a
   SharedUtilities: 5d614f2fa88207d901026de9645f2c60f4bdd28d
   SharedUtilitiesMocks: 05845b226fb1bcbb9087f9d76f677f2cd669da1d
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
@@ -87,6 +115,6 @@ SPEC CHECKSUMS:
   SwiftMessages: 9cca50659fa22bb523b4dd2a958d4442e843a354
   SwiftyMocky: 014739247afadb65efb5bb92ede32c22b9365762
 
-PODFILE CHECKSUM: 85f782d891e2147e5d0cc54bc4ba0e7289a053d6
+PODFILE CHECKSUM: 24a9e189e93ff3eb39fb3958df5c789b73b554f8
 
 COCOAPODS: 1.11.2
