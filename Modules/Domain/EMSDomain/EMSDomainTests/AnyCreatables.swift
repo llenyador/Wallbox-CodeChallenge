@@ -17,7 +17,7 @@ extension CustomMeasurement: AnyCreatable {
 extension QuasarPowerStatus: CaseIterable {
     public static var allCases: [QuasarPowerStatus] {
         [
-            .providingEnergy(.any),
+            .supplyingEnergy(.any),
             .consumingEnergy(.any)
         ]
     }

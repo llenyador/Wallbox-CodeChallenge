@@ -35,7 +35,7 @@ extension DashboardModels.QuasarStatus: CaseIterable {
     public static var allCases: [Self] {
         [
             .consumingEnergy(.any),
-            .providingEnergy(.any)
+            .supplyingEnergy(.any)
         ]
     }
 }

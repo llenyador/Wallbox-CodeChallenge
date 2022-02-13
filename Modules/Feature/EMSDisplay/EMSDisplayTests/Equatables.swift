@@ -28,7 +28,7 @@ extension DashboardModels.EnergySource: Equatable {
 extension DashboardModels.QuasarStatus: Equatable {
     public static func == (lhs: Self, rhs: Self) -> Bool {
         switch (lhs, rhs) {
-        case let (.providingEnergy(lhsEnergy), .providingEnergy(rhsEnergy)):
+        case let (.supplyingEnergy(lhsEnergy), .supplyingEnergy(rhsEnergy)):
             return lhsEnergy == rhsEnergy
         case let (.consumingEnergy(lhsEnergy), .consumingEnergy(rhsEnergy)):
             return lhsEnergy == rhsEnergy

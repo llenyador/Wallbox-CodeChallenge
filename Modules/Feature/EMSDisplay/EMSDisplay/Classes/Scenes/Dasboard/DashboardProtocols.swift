@@ -54,7 +54,7 @@ enum DashboardModels {
 
 extension DashboardModels {
     enum QuasarStatus {
-        case providingEnergy(EnergySource)
+        case supplyingEnergy(EnergySource)
         case consumingEnergy(CustomMeasurement<KiloWattHour>)
     }
 

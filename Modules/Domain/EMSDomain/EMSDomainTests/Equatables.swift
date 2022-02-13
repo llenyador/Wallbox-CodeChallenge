@@ -22,7 +22,7 @@ extension LiveData: Equatable {
 extension QuasarPowerStatus: Equatable {
     public static func == (lhs: Self, rhs: Self) -> Bool {
         switch (lhs, rhs) {
-        case let (.providingEnergy(lhsPower), .providingEnergy(rhsPower)):
+        case let (.supplyingEnergy(lhsPower), .supplyingEnergy(rhsPower)):
             return lhsPower == rhsPower
         case let (.consumingEnergy(lhsPower), .consumingEnergy(rhsPower)):
             return lhsPower == rhsPower

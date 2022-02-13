@@ -31,9 +31,9 @@ final class DashboardWorkerTests: XCTestCase {
     }
 
     // MARK: - Tests
-    func testQuasarProvidingEnergy() throws {
-        let liveData = LiveData.any(quasarsPowerStatus: .providingEnergy(.any))
-        let expectedOutput = DashboardModels.Data.quasarProvidingEnergy(liveData)
+    func testQuasarSupplyingEnergy() throws {
+        let liveData = LiveData.any(quasarsPowerStatus: .supplyingEnergy(.any))
+        let expectedOutput = DashboardModels.Data.quasarSupplyingEnergy(liveData)
         getLiveDataUseCaseMock.given(.execute(willReturn: .just(liveData)))
 
         let publisher = worker.getLiveData()
@@ -66,7 +66,7 @@ private extension DashboardWorkerTests {
 
 // MARK: - Model Helpers
 private extension DashboardModels.Data {
-    static func quasarProvidingEnergy(_ liveData: LiveData) -> Self {
+    static func quasarSupplyingEnergy(_ liveData: LiveData) -> Self {
         let quasarsEnergySource: DashboardModels.EnergySource = .init(
             power: liveData.quasarsPowerStatus.power,
             energy: EnergyConversion.convertToKWh(liveData.quasarsPowerStatus.power),
@@ -75,7 +75,7 @@ private extension DashboardModels.Data {
                 buildingDemandPower: liveData.buildingDemandPower
             )
         )
-        return .init(quasarStatus: .providingEnergy(quasarsEnergySource),
+        return .init(quasarStatus: .supplyingEnergy(quasarsEnergySource),
                      solarPower: solarPower(liveData),
                      gridPower: gridPower(liveData),
                      buildingDemandPower: liveData.buildingDemandPower)

@@ -27,8 +27,8 @@ final class DashboardViewModelMapperTests: XCTestCase {
 
     func testQuasarStatusSupplyingEnergy() throws {
         let quasarEnergySource: DashboardModels.EnergySource = .any
-        let input = DashboardModels.Data.any(quasarStatus: .providingEnergy(quasarEnergySource))
-        let expectedOutput = DashboardModels.ViewModel.quasarStatusProvidingEnergy(
+        let input = DashboardModels.Data.any(quasarStatus: .supplyingEnergy(quasarEnergySource))
+        let expectedOutput = DashboardModels.ViewModel.quasarStatusSupplyingEnergy(
             from: input,
             quasarEnergySource: quasarEnergySource
         )
@@ -68,7 +68,7 @@ private extension DashboardModels.ViewModel {
         )
     }
 
-    static func quasarStatusProvidingEnergy(
+    static func quasarStatusSupplyingEnergy(
         from data: DashboardModels.Data,
         quasarEnergySource: DashboardModels.EnergySource
     ) -> Self {
@@ -82,7 +82,7 @@ private extension DashboardModels.ViewModel {
             liveSessionVM: .init(
                 titleText: "dashboard_live_session_title".localized,
                 sourcePower1VM: .solarPower(data.solarPower),
-                sourcePower2VM: .quasarProvidingEnergy(quasarEnergySource),
+                sourcePower2VM: .quasarSupplyingEnergy(quasarEnergySource),
                 sourcePower3VM: .gridPower(data.gridPower),
                 totalPowerVM: .buildingDemandPower(data.buildingDemandPower)
             ),
@@ -91,7 +91,7 @@ private extension DashboardModels.ViewModel {
                 state: .displayGauges(
                     gaugeVMs: [
                         .solarPower(data.solarPower),
-                        .quasarProvidingEnergy(quasarEnergySource),
+                        .quasarSupplyingEnergy(quasarEnergySource),
                         .gridPower(data.gridPower)
                     ]
                 )
@@ -115,7 +115,7 @@ private extension VerticalLabelsStackViewModel {
         )
     }
 
-    static func quasarProvidingEnergy(_ data: DashboardModels.EnergySource) -> Self {
+    static func quasarSupplyingEnergy(_ data: DashboardModels.EnergySource) -> Self {
         .init(
             topText: "dashboard_quasar_power".localized,
             bottomText: measurementToText(data.power)
@@ -149,7 +149,7 @@ private extension GaugeInfoViewViewModel {
         )
     }
 
-    static func quasarProvidingEnergy(_ data: DashboardModels.EnergySource) -> Self {
+    static func quasarSupplyingEnergy(_ data: DashboardModels.EnergySource) -> Self {
         .init(
             infoText: "dashboard_quasar_power".localized,
             value: normalizePercentageTo1(data.suppliedPercentage),
@@ -162,7 +162,7 @@ private extension GaugeInfoViewViewModel {
 private extension DashboardModels.QuasarStatus {
     var energy: CustomMeasurement<KiloWattHour> {
         switch self {
-        case let .providingEnergy(energySource):
+        case let .supplyingEnergy(energySource):
             return energySource.energy
         case let .consumingEnergy(energy):
             return energy

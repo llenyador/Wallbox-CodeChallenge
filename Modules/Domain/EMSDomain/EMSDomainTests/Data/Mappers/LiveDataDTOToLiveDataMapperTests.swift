@@ -16,7 +16,7 @@ final class LiveDataDTOToLiveDataMapperTests: XCTestCase {
         if input.quasarsPower >= 0 {
             quasarStatus = .consumingEnergy(abs(input.quasarsPower))
         } else {
-            quasarStatus = .providingEnergy(abs(input.quasarsPower))
+            quasarStatus = .supplyingEnergy(abs(input.quasarsPower))
         }
         let expectedOutput = LiveData(
             solarPower: input.solarPower,

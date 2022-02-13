@@ -73,7 +73,7 @@ private extension DashboardWorker {
         let quasarsPower = liveData.quasarsPowerStatus.power
         let quasarEnergy = EnergyConversion.convertToKWh(quasarsPower)
         switch liveData.quasarsPowerStatus {
-        case .providingEnergy:
+        case .supplyingEnergy:
             let energySource = DashboardModels.EnergySource(
                 power: quasarsPower,
                 energy: EnergyConversion.convertToKWh(quasarsPower),
@@ -82,7 +82,7 @@ private extension DashboardWorker {
                     buildingDemandPower: liveData.buildingDemandPower
                 )
             )
-            return .providingEnergy(energySource)
+            return .supplyingEnergy(energySource)
             
         case .consumingEnergy:
             return .consumingEnergy(quasarEnergy)
