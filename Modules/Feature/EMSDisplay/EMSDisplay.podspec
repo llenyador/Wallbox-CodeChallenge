@@ -25,22 +25,12 @@ Pod::Spec.new do |s|
   s.dependency 'CoreLayout'
   s.dependency 'EMSDomain'
 
-#  s.test_spec 'EMSDisplayTests' do |test_spec|
-#      test_spec.source_files = 'EMSDisplayTests/**/*.{h,m,swift}'
-#      test_spec.dependency 'SwiftyMocky', '4.1.0'
-#      test_spec.dependency 'SharedTestingUtilities'
-#      test_spec.dependency 'EMSDomainMocks'
-#      test_spec.requires_app_host = true
-#  end
-
-#  s.test_spec 'EMSDisplayUITests' do |test_spec|
-#      test_spec.requires_app_host = true
-#
-#      test_spec.source_files = 'EMSDisplayUITests/**/*.{h,m,swift}'
-#      test_spec.resource = 'EMSDisplayUITests/**/*.{json,jpeg,jpg,png}'
-#
-#    test_spec.dependency 'SnapshotTesting', '1.9.0'
-#      test_spec.dependency 'SharedUtilities'
-#      test_spec.dependency 'SharedTestingUtilities'
-#    end
+  s.test_spec 'EMSDisplayTests' do |test_spec|
+      test_spec.source_files = 'EMSDisplayTests/**/*.{h,m,swift}'
+      test_spec.dependency 'SwiftyMocky', '4.1.0'
+      test_spec.dependency 'SharedTestingUtilities'
+      test_spec.dependency 'CoreLayoutMocks'
+      test_spec.dependency 'EMSDomainMocks'
+      test_spec.requires_app_host = true
+  end
 end

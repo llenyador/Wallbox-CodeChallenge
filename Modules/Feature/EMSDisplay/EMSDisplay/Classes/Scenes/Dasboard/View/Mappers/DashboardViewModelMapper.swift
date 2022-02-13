@@ -30,12 +30,12 @@ private extension DashboardViewModelMapper {
         case let .providingEnergy(powerSource):
             return .init(infoText: "dashboard_quasars_supplying".localized,
                          value: Constants.gaugeMaxValue,
-                         valueText: powerSource.power.description,
+                         valueText: mapMeasurementToText(powerSource.energy),
                          style: .primary)
         case let .consumingEnergy(energy):
             return .init(infoText: "dashboard_quasars_consuming".localized,
                          value: Constants.gaugeMaxValue,
-                         valueText: energy.description,
+                         valueText: mapMeasurementToText(energy),
                          style: .red)
         }
     }

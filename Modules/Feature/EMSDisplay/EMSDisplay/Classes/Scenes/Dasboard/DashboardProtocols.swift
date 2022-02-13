@@ -54,19 +54,20 @@ enum DashboardModels {
 
 extension DashboardModels {
     enum QuasarStatus {
-        case providingEnergy(PowerSource)
+        case providingEnergy(EnergySource)
         case consumingEnergy(CustomMeasurement<KiloWattHour>)
     }
 
-    struct PowerSource {
+    struct EnergySource {
         let power: CustomMeasurement<KiloWatt>
+        let energy: CustomMeasurement<KiloWattHour>
         let suppliedPercentage: Double
     }
 
     struct Data {
         let quasarStatus: QuasarStatus
-        let solarPower: PowerSource
-        let gridPower: PowerSource
+        let solarPower: EnergySource
+        let gridPower: EnergySource
         let buildingDemandPower: CustomMeasurement<KiloWatt>
     }
 }

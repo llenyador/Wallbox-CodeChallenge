@@ -10,22 +10,27 @@ import Combine
 import SharedUtilities
 import EMSDomain
 
-final class DashboardInteractor {
+final class DashboardInteractor<
+    Scheduler: Combine.Scheduler
+>{
     
     private let presenter: DashboardPresenterProtocol
     private let router: DashboardRouterProtocol
     private let worker: DashboardWorkerProtocol
+    private let scheduler: Scheduler
     
     private var cancelables = Set<AnyCancellable>()
     
     init(
         presenter: DashboardPresenterProtocol,
         router: DashboardRouterProtocol,
-        worker: DashboardWorkerProtocol
+        worker: DashboardWorkerProtocol,
+        scheduler: Scheduler
     ) {
         self.presenter = presenter
         self.router = router
         self.worker = worker
+        self.scheduler = scheduler
     }
 }
 
@@ -46,17 +51,18 @@ private extension DashboardInteractor {
         presenter.presentLoading()
 
         worker.getLiveData()
-            .sinkOnMain { [weak self] data in
+            .receive(on: scheduler)
+            .sink(onSuccess: { [weak self] data in
                 guard let self = self else {
                     return
                 }
                 self.presenter.present(data: data)
-            } onFailure: { [weak self] error in
+            }, onFailure: { [weak self] error in
                 guard let self = self else {
                     return
                 }
                 self.presenter.present(error: error)
-            }.store(in: &cancelables)
+            }).store(in: &cancelables)
 
     }
 }

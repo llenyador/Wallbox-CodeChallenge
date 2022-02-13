@@ -42,15 +42,17 @@ private extension DashboardWorker {
         _ liveData: LiveData
     ) -> DashboardModels.Data {
         
-        let solarPower = DashboardModels.PowerSource(
+        let solarPower = DashboardModels.EnergySource(
             power: liveData.solarPower,
+            energy: EnergyConversion.convertToKWh(liveData.solarPower),
             suppliedPercentage: percentageFor(
                 liveData.solarPower,
                 buildingDemandPower: liveData.buildingDemandPower
             )
         )
-        let gridPower = DashboardModels.PowerSource(
+        let gridPower = DashboardModels.EnergySource(
             power: liveData.gridPower,
+            energy: EnergyConversion.convertToKWh(liveData.gridPower),
             suppliedPercentage: percentageFor(
                 liveData.gridPower,
                 buildingDemandPower: liveData.buildingDemandPower
@@ -72,8 +74,9 @@ private extension DashboardWorker {
         let quasarEnergy = EnergyConversion.convertToKWh(quasarsPower)
         switch liveData.quasarsPowerStatus {
         case .providingEnergy:
-            let energySource = DashboardModels.PowerSource(
+            let energySource = DashboardModels.EnergySource(
                 power: quasarsPower,
+                energy: EnergyConversion.convertToKWh(quasarsPower),
                 suppliedPercentage: percentageFor(
                     quasarsPower,
                     buildingDemandPower: liveData.buildingDemandPower

@@ -14,13 +14,34 @@ extension CustomMeasurement: AnyCreatable {
     }
 }
 
+extension QuasarPowerStatus: CaseIterable {
+    public static var allCases: [QuasarPowerStatus] {
+        [
+            .providingEnergy(.any),
+            .consumingEnergy(.any)
+        ]
+    }
+}
+
 extension LiveData: AnyCreatable {
     public static var any: Self {
         .init(
             solarPower: .any,
-            quasarsPower: .any,
+            quasarsPowerStatus: .any,
             gridPower: .any,
-            buildingDemand: .any,
+            buildingDemandPower: .any,
+            systemSoc: .any,
+            totalEnergy: .any,
+            currentEnergy: .any
+        )
+    }
+
+    public static func any(quasarsPowerStatus: QuasarPowerStatus) -> Self {
+        .init(
+            solarPower: .any,
+            quasarsPowerStatus: quasarsPowerStatus,
+            gridPower: .any,
+            buildingDemandPower: .any,
             systemSoc: .any,
             totalEnergy: .any,
             currentEnergy: .any

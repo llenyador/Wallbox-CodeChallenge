@@ -10,12 +10,25 @@
 extension LiveData: Equatable {
     public static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.solarPower == rhs.solarPower &&
-        lhs.quasarsPower == rhs.quasarsPower &&
+        lhs.quasarsPowerStatus == rhs.quasarsPowerStatus &&
         lhs.gridPower == rhs.gridPower &&
-        lhs.buildingDemand == rhs.buildingDemand &&
+        lhs.buildingDemandPower == rhs.buildingDemandPower &&
         lhs.systemSoc == rhs.systemSoc &&
         lhs.totalEnergy == rhs.totalEnergy &&
         lhs.currentEnergy == rhs.currentEnergy
+    }
+}
+
+extension QuasarPowerStatus: Equatable {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        switch (lhs, rhs) {
+        case let (.providingEnergy(lhsPower), .providingEnergy(rhsPower)):
+            return lhsPower == rhsPower
+        case let (.consumingEnergy(lhsPower), .consumingEnergy(rhsPower)):
+            return lhsPower == rhsPower
+        default:
+            return false
+        }
     }
 }
 

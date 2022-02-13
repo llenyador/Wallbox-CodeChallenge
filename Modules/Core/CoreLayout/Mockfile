@@ -1,0 +1,12 @@
+sourceryCommand: null
+CoreLayout-Unit-CoreLayoutTests:
+  sources:
+    include:
+    - ./CoreLayout/Classes
+  output: ./CoreLayoutTests/Mock.generated.swift
+  targets:
+  - CoreLayout_Tests
+  testable:
+  - CoreLayout
+  import:
+  - SharedUtilities
