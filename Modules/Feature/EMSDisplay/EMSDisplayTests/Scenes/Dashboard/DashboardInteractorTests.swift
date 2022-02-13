@@ -33,7 +33,7 @@ final class DashboardInteractorTests: XCTestCase {
     }
 
     // MARK: - Tests
-    func testViewDidLoadSuccess() throws {
+    func testViewDidLoadSuccess() {
         let expectedOutput = DashboardModels.Data.any
         let publisher = scheduler.scheduleSuccessPublisher(atVirtualTime: 1,
                                                            returnedData: expectedOutput)
@@ -66,6 +66,11 @@ final class DashboardInteractorTests: XCTestCase {
         workerMock.verifyOnce(.getLiveData())
         presenterMock.verifyOnce(.present(error: .value(expectedError)))
     }
+
+    func testDidTapLiveStatsView() {
+        interactor.didTapLiveStatsView()
+        routerMock.verifyOnce(.routeToStats())
+    }
 }
 
 private extension DashboardInteractorTests {
@@ -80,28 +85,5 @@ private extension DashboardInteractorTests {
             worker: workerMock,
             scheduler: scheduler
         )
-    }
-}
-
-extension TestSchedulerOf {
-    func scheduleSuccessPublisher<Data>(atVirtualTime time: SchedulerTimeType.Stride,
-                                        returnedData: Data) -> PublisherResult<Data> {
-        FutureResult { callback in
-            self.schedule(after: self.now.advanced(by: time)) {
-                callback(.success(returnedData))
-            }
-        }.eraseToAnyPublisher()
-    }
-
-    func scheduleErrorPublisher<Data>(
-        atVirtualTime time: SchedulerTimeType.Stride,
-        dataType: Data.Type,
-        error: Error
-    ) -> PublisherResult<Data> {
-        FutureResult { callback in
-            self.schedule(after: self.now.advanced(by: time)) {
-                callback(.failure(error))
-            }
-        }.eraseToAnyPublisher()
     }
 }
