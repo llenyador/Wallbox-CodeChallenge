@@ -1,0 +1,18 @@
+use_frameworks!
+
+platform :ios, '15.0'
+
+target 'EMSDisplay_Example' do
+  pod 'EMSDisplay', :path => '../', :testspecs => ['EMSDisplayTests']
+  pod 'SharedUtilities', :path => '../../../Core/SharedUtilities'
+  pod 'CoreLayout', :path => '../../../Core/CoreLayout'
+  pod 'EMSDomain', :path => '../../../Domain/EMSDomain'
+  
+  target 'EMSDisplay_Tests' do
+    inherit! :search_paths
+
+    pod 'SharedTestingUtilities', :path => '../../../Core/SharedUtilities'
+    pod 'EMSDomainMocks', :path => '../../../Domain/EMSDomain'
+    pod 'CoreLayoutMocks', :path => '../../../Core/CoreLayout'
+  end
+end

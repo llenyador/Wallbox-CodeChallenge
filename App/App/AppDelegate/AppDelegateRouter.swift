@@ -7,6 +7,7 @@
 //
 
 import CoreLayout
+import EMSDisplay
 
 final class AppDelegateRouter {
     private weak var window: UIWindow?
@@ -27,7 +28,7 @@ final class AppDelegateRouter {
 // MARK: - AppDelegateRouterProtocol
 extension AppDelegateRouter: AppDelegateRouterProtocol {
     func routeToInitialScreen() {
-        let initialVC = UIViewController() // TODO: Create correct scene.
+        let initialVC = EMSDisplayFactory.buildDashboard()
         let navC = UINavigationController(rootViewController: initialVC)
         window?.rootViewController = navC
         window?.makeKeyAndVisible()

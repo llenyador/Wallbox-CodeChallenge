@@ -42,6 +42,7 @@ public extension LoadingView {
         } else {
             view.stopAnimating()
         }
+        isHidden = !startsLoading
     }
 }
 

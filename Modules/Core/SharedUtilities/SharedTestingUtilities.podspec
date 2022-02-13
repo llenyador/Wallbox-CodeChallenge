@@ -4,7 +4,6 @@ Pod::Spec.new do |s|
   s.version          = "0.1.0"
   s.summary          = "Shared testing utilities"
   s.homepage         = ""
-  s.license          = 'Code is MIT'
   s.author           = { 'Aitor Salvador' => 'aitorsg93@gmail.com' }
   s.homepage         = 'https://github.com/llenyador/Books'
   s.source           = { :git => 'https://github.com/llenyador/Books.git', :tag => s.version.to_s }

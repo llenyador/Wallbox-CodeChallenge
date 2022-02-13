@@ -29,6 +29,12 @@ public extension CustomMeasurement {
 // MARK: - Equatable
 extension CustomMeasurement: Equatable {}
 
+extension CustomMeasurement: Comparable {
+    public static func < (lhs: CustomMeasurement<Unit>, rhs: CustomMeasurement<Unit>) -> Bool {
+        lhs.value < rhs.value
+    }
+}
+
 // MARK: - CustomStringConvertible
 extension CustomMeasurement: CustomStringConvertible {
     public var description: String {
