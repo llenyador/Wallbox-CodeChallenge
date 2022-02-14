@@ -6,6 +6,7 @@
   
 */
 
+// MARK: - Dashboard
 "dashboard_title" = "Dashboard";
 "dashboard_quasars_supplying" = "Quasars supplying energy";
 "dashboard_quasars_consuming" = "Quasars consuming energy";
@@ -16,6 +17,13 @@
 "dashboard_building_demand" = "Building total demand";
 "dashboard_live_sstats_title" = "Current session stats";
 "dashboard_generic_error" = "Something went wrong";
+
+// MARK: - Historical Plots
+"historical_plots_title" = "Historical record";
+"historical_plots_legend_solar_power" = "Solar power";
+"historical_plots_legend_grid_power" = "Grid power";
+"historical_plots_legend_quasars_power" = "Quasars power";
+"historical_plots_legend_building_demand_power" = "Building demand power";
 
 // MARK: - Errors
 "error_custom_no_internet_connection" = "You don't have internet connection";

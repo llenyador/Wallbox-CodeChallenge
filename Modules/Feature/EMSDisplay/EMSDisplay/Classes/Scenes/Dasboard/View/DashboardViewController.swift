@@ -9,7 +9,7 @@
 import CoreLayout
 import SharedUtilities
 
-final class DashboardViewController: UIViewController {
+final class DashboardViewController: BaseViewController {
     private let _view: DashboardView
     var interactor: DashboardInteractorProtocol!
     

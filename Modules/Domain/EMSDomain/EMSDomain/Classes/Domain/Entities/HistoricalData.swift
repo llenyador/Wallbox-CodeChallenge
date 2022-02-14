@@ -9,6 +9,7 @@ public struct HistoricalData {
     public let buildingActivePower: CustomMeasurement<KiloWatt>
     public let gridActivePower: CustomMeasurement<KiloWatt>
     public let pvActivePower: CustomMeasurement<KiloWatt>
-    public let quasarsActivePower: CustomMeasurement<KiloWatt>
+    public let quasarsActivePowerStatus: QuasarPowerStatus
     public let timestamp: Date
 }
+

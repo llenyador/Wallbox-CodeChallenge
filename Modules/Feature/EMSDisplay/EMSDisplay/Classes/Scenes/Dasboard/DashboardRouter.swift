@@ -19,7 +19,11 @@ final class DashboardRouter {
 // MARK: - DashboardRouterProtocol
 extension DashboardRouter: DashboardRouterProtocol {
     func routeToStats() {
-        // TODO
+        guard let viewController = viewController else {
+            return assertionFailure("viewController should not be nil")
+        }
+        let vc = HistoricalPlotsFactory.buildScene()
+        viewController.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
