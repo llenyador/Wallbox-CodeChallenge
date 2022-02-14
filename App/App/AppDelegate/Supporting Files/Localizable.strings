@@ -23,7 +23,7 @@
 "historical_plots_legend_solar_power" = "Solar power";
 "historical_plots_legend_grid_power" = "Grid power";
 "historical_plots_legend_quasars_power" = "Quasars power";
-"historical_plots_legend_building_demand_power" = "Building demand record";
+"historical_plots_legend_building_demand_power" = "Building demand power";
 
 // MARK: - Errors
 "error_custom_no_internet_connection" = "You don't have internet connection";

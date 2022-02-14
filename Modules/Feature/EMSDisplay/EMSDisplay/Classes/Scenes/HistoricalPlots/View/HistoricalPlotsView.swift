@@ -3,7 +3,7 @@
 //  Pods
 //
 //  Created by Aitor Salvador on 13/2/22.
-//  Copyright (c) 2022 ___ORGANIZATIONNAME___. All rights reserved.
+//  Copyright (c) 2022 Aitor Salvador. All rights reserved.
 //
 
 import CoreLayout
@@ -75,9 +75,16 @@ private extension HistoricalPlotsView {
         chartView.snp.makeConstraints {
             $0.left.right.equalToSuperview()
                 .inset(UIConstants.hMargin)
-            $0.aspectRatio(.init(width: 2, height: 3.6),
+            $0.aspectRatio(Constants.chartAspectRatio,
                            inView: chartView)
             $0.top.equalToSuperview()
         }
+    }
+}
+
+// MARK: - Constants
+private extension HistoricalPlotsView {
+    enum Constants {
+        static let chartAspectRatio = CGSize(width: 2, height: 3.6)
     }
 }

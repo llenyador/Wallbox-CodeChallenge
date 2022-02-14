@@ -27,13 +27,12 @@ public final class ChartView: UIView {
         let xAxis = $0.xAxis
         xAxis.labelPosition = .bottom
         xAxis.labelFont = .systemFont(ofSize: 12)
-        xAxis.labelCount = 7
+        xAxis.labelCount = Constants.xLabelCount
         
         let leftAxis = $0.leftAxis
         leftAxis.labelFont = .systemFont(ofSize: 12)
-        leftAxis.labelCount = 15
+        leftAxis.labelCount = Constants.yLabelCount
         leftAxis.labelPosition = .outsideChart
-        leftAxis.spaceTop = 0.15
         leftAxis.gridColor = .primary
         leftAxis.drawGridLinesEnabled = true
         leftAxis.granularityEnabled = true
@@ -57,7 +56,7 @@ public extension ChartView {
         chartView.legend.setCustom(entries: model.legendEntries)
         chartView.xAxis.valueFormatter = model.formatter
         chartView.data = LineChartData(dataSets: model.dataSets)
-        chartView.animate(yAxisDuration: 0.5)
+        chartView.animate(yAxisDuration: Constants.animationDuration)
     }
 
 }
@@ -77,5 +76,13 @@ private extension ChartView {
         chartView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+    }
+}
+
+private extension ChartView {
+    enum Constants {
+        static let xLabelCount: Int = 7
+        static let yLabelCount: Int = 15
+        static let animationDuration: TimeInterval = 0.15
     }
 }

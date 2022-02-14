@@ -9,17 +9,15 @@ import Charts
 import CoreLayout
 import EMSDomain
 import SharedUtilities
-import UIKit
 
 enum HistoricalDataToLineChartModelMapper: MapperProtocol {
-    private typealias DataSetDictionary = [ChartMappingModels.PowerSource: LineChartDataSet]
+    private typealias DataSetDictionary = [ChartMappingModels.PowerSupplyType: LineChartDataSet]
 
     static func map(_ input: [HistoricalData]) throws -> LineChartModel {
         var indexCounter: Int = 0
         var timestampsDict: [Double: Date] = [:]
         var dataSetDictionary: DataSetDictionary = [:]
 
-        
         input.forEach { data in
             appendEntries(toDict: &dataSetDictionary,
                           fromData: data,
@@ -31,7 +29,7 @@ enum HistoricalDataToLineChartModelMapper: MapperProtocol {
 
         return .init(
             dataSets: Array(dataSetDictionary.values),
-            legendEntries: ChartMappingModels.PowerSource.legendEntries,
+            legendEntries: ChartMappingModels.PowerSupplyType.legendEntries,
             formatter: ChartDateAxisFormatter(timestampsDict: timestampsDict)
         )
     }
@@ -44,7 +42,7 @@ private extension HistoricalDataToLineChartModelMapper {
         fromData data: HistoricalData,
         indexCounter: Int
     ) {
-        ChartMappingModels.PowerSource.allCases.forEach { source in
+        ChartMappingModels.PowerSupplyType.allCases.forEach { source in
             var power: Double
             switch source {
             case .solarPower:
@@ -78,7 +76,7 @@ private extension Dictionary {
     mutating func appendEntry(
         _ value: ChartDataEntry,
         forKey key: Key
-    ) where Key == ChartMappingModels.PowerSource,
+    ) where Key == ChartMappingModels.PowerSupplyType,
                 Value == LineChartDataSet {
         if let existingSet = self.value(forKey: key) {
             existingSet.append(value)

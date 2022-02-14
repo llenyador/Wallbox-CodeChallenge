@@ -3,7 +3,7 @@
 //  Pods
 //
 //  Created by Aitor Salvador on 13/2/22.
-//  Copyright (c) 2022 ___ORGANIZATIONNAME___. All rights reserved.
+//  Copyright (c) 2022 Aitor Salvador. All rights reserved.
 //
 
 import Combine
@@ -50,9 +50,6 @@ private extension HistoricalPlotsInteractor {
             .sink { [weak self] data in
                 guard let self = self else {
                     return
-                }
-                data.forEach {
-                    print($0.gridActivePower)
                 }
                 self.presenter.present(data: data)
             } onFailure: { [weak self] error in

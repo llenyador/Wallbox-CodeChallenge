@@ -3,7 +3,7 @@
 //  Pods
 //
 //  Created by Aitor Salvador on 13/2/22.
-//  Copyright (c) 2022 ___ORGANIZATIONNAME___. All rights reserved.
+//  Copyright (c) 2022 Aitor Salvador. All rights reserved.
 //
 
 import Combine
@@ -29,8 +29,4 @@ extension HistoricalPlotsWorker: HistoricalPlotsWorkerProtocol {
     func getHistoricalData() -> PublisherResult<[HistoricalData]> {
         getHistoricalDataUseCase.execute()
     }
-}
-
-// MARK: - Private methods
-private extension HistoricalPlotsWorker {
 }

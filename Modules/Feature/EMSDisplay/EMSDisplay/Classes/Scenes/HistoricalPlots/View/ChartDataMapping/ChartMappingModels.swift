@@ -5,11 +5,12 @@
 //  Created by Aitor Salvador on 14/2/22.
 //
 
+import CoreLayout
 import Charts
 import SharedUtilities
 
 enum ChartMappingModels {
-    enum PowerSource: CaseIterable, Hashable {
+    enum PowerSupplyType: CaseIterable, Hashable {
         case solarPower
         case buildingDemandPower
         case gridPower
@@ -18,13 +19,13 @@ enum ChartMappingModels {
         var color: UIColor {
             switch self {
             case .solarPower:
-                return .green
-            case .buildingDemandPower:
                 return .yellow
-            case .gridPower:
+            case .buildingDemandPower:
                 return .red
-            case .quasarsPower:
+            case .gridPower:
                 return .blue
+            case .quasarsPower:
+                return .primary
             }
         }
 
