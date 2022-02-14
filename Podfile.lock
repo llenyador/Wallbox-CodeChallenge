@@ -1,6 +1,10 @@
 PODS:
+  - Charts (3.6.0):
+    - Charts/Core (= 3.6.0)
+  - Charts/Core (3.6.0)
   - CoreLayout (0.1.0):
-    - GaugeKit
+    - Charts (= 3.6.0)
+    - GaugeKit (= 0.5.1)
     - Nuke
     - NVActivityIndicatorView (= 5.1.1)
     - SharedUtilities
@@ -68,6 +72,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Charts
     - GaugeKit
     - Nuke
     - NVActivityIndicatorView
@@ -97,7 +102,8 @@ EXTERNAL SOURCES:
     :path: Modules/Core/SharedUtilities
 
 SPEC CHECKSUMS:
-  CoreLayout: f5d6d94c4aa4ad8fce2043a0c7e9cf4c414490fb
+  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
+  CoreLayout: e5039e5b0a3aee5a891f2b83ff030007dce14611
   CoreLayoutMocks: 1a022ba226cbd30ee80ad35cd119693fd3993efa
   EMSDisplay: c64a5d8745c4df14e4c30c64f85e190e17891085
   EMSDomain: 0d3bc41caccd3a6aa661e160b4229bf1c7efd0ba

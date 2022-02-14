@@ -9,4 +9,8 @@ public enum EMSDisplayFactory {
     public static func buildDashboard() -> UIViewController {
         DashboardFactory.buildScene()
     }
+
+    public static func buildHistoricalPlot() -> UIViewController {
+        HistoricalPlotsFactory.buildScene()
+    }
 }

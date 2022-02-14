@@ -9,17 +9,10 @@ import SharedUtilities
 
 enum LiveDataDTOToLiveDataMapper: MapperProtocol {
     static func map(_ input: LiveDataDTO) throws -> LiveData {
-        let absoluteQuasarPower = abs(input.quasarsPower)
-        var quasarStatus: QuasarPowerStatus
-        if input.quasarsPower >= 0 {
-            quasarStatus = .consumingEnergy(absoluteQuasarPower)
-        } else {
-            quasarStatus = .supplyingEnergy(absoluteQuasarPower)
-        }
-
+        let quasarsPowerStatus = try QuasarPowerToQuasarsPoweStatusMapper.map(input.quasarsPower)
         return .init(
             solarPower: input.solarPower,
-            quasarsPowerStatus: quasarStatus,
+            quasarsPowerStatus: quasarsPowerStatus,
             gridPower: input.gridPower,
             buildingDemandPower: input.buildingDemand,
             systemSoc: input.systemSoc,
