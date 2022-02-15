@@ -35,7 +35,7 @@ final class GetLiveDataUseCaseTests: XCTestCase {
         let output = try awaitPublisher(publisher)
         XCTAssertEqual(output, expectedLiveData)
         
-        repositoryMock.verify(.getLiveData(), count: .once)
+        repositoryMock.verifyOnce(.getLiveData())
     }
 
     func testViewDidLoadFailure() throws {
@@ -49,7 +49,7 @@ final class GetLiveDataUseCaseTests: XCTestCase {
         assertError(optionalError,
                     isEqualToExpectedError: expectedError)
 
-        repositoryMock.verify(.getLiveData(), count: .once)
+        repositoryMock.verifyOnce(.getLiveData())
     }
 }
 

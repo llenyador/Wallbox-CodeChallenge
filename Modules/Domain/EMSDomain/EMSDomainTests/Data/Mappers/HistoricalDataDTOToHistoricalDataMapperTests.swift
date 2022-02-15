@@ -12,11 +12,12 @@ import SharedTestingUtilities
 final class HistoricalDataDTOToHistoricalDataMapperTests: XCTestCase {
     func test() throws {
         let input = HistoricalDataDTO.any
+        let quasarsStatus = try QuasarPowerToQuasarsPoweStatusMapper.map(input.quasarsActivePower)
         let expectedOutput = HistoricalData(
             buildingActivePower: input.buildingActivePower,
             gridActivePower: input.gridActivePower,
             pvActivePower: input.pvActivePower,
-            quasarsActivePower: input.quasarsActivePower,
+            quasarsActivePowerStatus: quasarsStatus,
             timestamp: input.timestamp
         )
         try testMapper(

@@ -37,7 +37,7 @@ extension HistoricalData: Equatable {
         lhs.buildingActivePower == rhs.buildingActivePower &&
         lhs.gridActivePower == rhs.gridActivePower &&
         lhs.pvActivePower == rhs.pvActivePower &&
-        lhs.quasarsActivePower == rhs.quasarsActivePower &&
+        lhs.quasarsActivePowerStatus == rhs.quasarsActivePowerStatus &&
         lhs.timestamp == rhs.timestamp
     }
 }

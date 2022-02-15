@@ -5,8 +5,9 @@
 //  Created by Aitor Salvador on 13/2/22.
 //
 
-import SharedTestingUtilities
+import Charts
 import CoreLayout
+import SharedTestingUtilities
 
 extension VerticalLabelsStackViewModel: AnyCreatable {
     public static var any: Self {
@@ -33,5 +34,41 @@ extension GaugeInfoViewViewModel: AnyCreatable {
             valueText: .any,
             style: .any
         )
+    }
+}
+
+extension LineChartModel: AnyCreatable {
+    final class TestFormatter: IAxisValueFormatter {
+        init() {}
+
+        func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+            ""
+        }
+    }
+
+    public static var any: Self {
+        .init(
+            dataSets: [.any],
+            legendEntries: [.any],
+            formatter: TestFormatter()
+        )
+    }
+}
+
+extension LineChartDataSet {
+    public static var any: LineChartDataSet {
+        LineChartDataSet(entries: [.any])
+    }
+}
+
+extension ChartDataEntry {
+    public static var any: ChartDataEntry {
+        .init(x: .any, y: .any)
+    }
+}
+
+extension LegendEntry {
+    public static var any: LegendEntry {
+        .init()
     }
 }

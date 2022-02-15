@@ -41,14 +41,14 @@ extension HistoricalPlotsViewController: HistoricalPlotsViewControllerProtocol {
         _view.loadingView.displayAnimating(state == .loading)
         switch state {
         case .loading:
-            _view.chartView.isHidden = true
+            _view.scrollView.isHidden = true
             _view.errorLabel.isHidden = true
         case let .error(message):
-            _view.chartView.isHidden = true
+            _view.scrollView.isHidden = true
             _view.errorLabel.isHidden = false
             _view.errorLabel.text = message
         case let .showData(chartModel):
-            _view.chartView.isHidden = false
+            _view.scrollView.isHidden = false
             _view.errorLabel.isHidden = true
             _view.chartView.display(model: chartModel)
         }

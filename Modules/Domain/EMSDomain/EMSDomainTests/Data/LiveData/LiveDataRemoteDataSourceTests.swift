@@ -41,13 +41,12 @@ final class LiveDataRemoteDataSourceTests: XCTestCase {
         let output = try awaitPublisher(publisher)
         XCTAssertEqual(output, expectedLiveData)
         
-        networkClientMock.verify(
+        networkClientMock.verifyOnce(
             .perform(
                 endpoint: .value(endpoint),
                 mapper: .any(LiveDataDTOToLiveDataMapper.Type.self),
                 waitsUntilConnected: .value(false)
-            ),
-            count: .once
+            )
         )
     }
 
@@ -68,13 +67,12 @@ final class LiveDataRemoteDataSourceTests: XCTestCase {
         assertError(optionalError,
                     isEqualToExpectedError: expectedError)
         
-        networkClientMock.verify(
+        networkClientMock.verifyOnce(
             .perform(
                 endpoint: .value(endpoint),
                 mapper: .any(LiveDataDTOToLiveDataMapper.Type.self),
                 waitsUntilConnected: .value(false)
-            ),
-            count: .once
+            )
         )
     }
 }

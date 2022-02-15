@@ -1,20 +1,22 @@
 //
-//  DashboardPresenterTests.swift
-//  EMSDisplay
+//  HistoricalPlotsPresenterTests.swift
 //
-//  Created by Aitor Salvador on 13/2/22.
+//  Created by Aitor Salvador on 14/2/22.
+//
 
 import XCTest
 import SwiftyMocky
 @testable import CoreLayoutMocks
 @testable import SharedTestingUtilities
 @testable import EMSDisplay
+@testable import EMSDomain
 
-final class DashboardPresenterTests: XCTestCase {
-    private var presenter: DashboardPresenter!
-    private var viewControllerMock: DashboardViewControllerProtocolMock!
+final class HistoricalPlotsPresenterTests: XCTestCase {
+    private var presenter: HistoricalPlotsPresenter!
+    private var viewControllerMock: HistoricalPlotsViewControllerProtocolMock!
     private var showGlobalMessageMock: ShowGlobalMessageProtocolMock!
 
+    // // MARK: - Test lifecycle
     override func setUp() {
         super.setUp()
         setupDependencies()
@@ -26,7 +28,8 @@ final class DashboardPresenterTests: XCTestCase {
         viewControllerMock = nil
         showGlobalMessageMock = nil
     }
-
+    
+    // MARK: Tests
     func testPresentError() {
         let expectedError = TestError.error1
         let expectedErrorMessage = ErrorMapper.map(error: expectedError)
@@ -36,17 +39,17 @@ final class DashboardPresenterTests: XCTestCase {
             .showError(errorMessage: .value(expectedErrorMessage)),
             count: .once
         )
-        let state: DashboardModels.ViewState = .error(message: "dashboard_generic_error".localized)
+        let state: HistoricalPlotsModels.ViewState = .error(message: "dashboard_generic_error".localized)
         viewControllerMock.verifyOnce(.display(state: .value(state)))
     }
 
     func testShowData() throws {
-        let data = DashboardModels.Data.any
-        let expectedVM = try DashboardViewModelMapper.map(data)
+        let data = [HistoricalData].any(length: 1)
+        let expectedVM = try HistoricalDataToLineChartModelMapper.map(data)
 
         presenter.present(data: data)
 
-        let state: DashboardModels.ViewState = .showData(expectedVM)
+        let state: HistoricalPlotsModels.ViewState = .showData(expectedVM)
         viewControllerMock.verifyOnce(
             .display(state: .value(state))
         )
@@ -58,7 +61,7 @@ final class DashboardPresenterTests: XCTestCase {
     }
 }
 
-private extension DashboardPresenterTests {
+private extension HistoricalPlotsPresenterTests {
     func setupDependencies() {
         viewControllerMock = .init()
         showGlobalMessageMock = .init()

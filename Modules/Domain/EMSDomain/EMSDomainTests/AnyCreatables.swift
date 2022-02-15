@@ -55,7 +55,7 @@ extension HistoricalData: AnyCreatable {
             buildingActivePower: .any,
             gridActivePower: .any,
             pvActivePower: .any,
-            quasarsActivePower: .any,
+            quasarsActivePowerStatus: .any,
             timestamp: .distantPast
         )
     }
