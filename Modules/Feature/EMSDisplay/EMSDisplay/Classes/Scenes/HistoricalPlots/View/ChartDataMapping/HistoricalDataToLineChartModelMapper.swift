@@ -26,10 +26,18 @@ enum HistoricalDataToLineChartModelMapper: MapperProtocol {
                                        forKey: indexCounter.doubleValue)
             indexCounter += 1
         }
+        var dataSets: [LineChartDataSet] = []
+        var legendEntries: [LegendEntry] = []
+        ChartMappingModels.PowerSupplyType.allCases.forEach {
+            legendEntries.append($0.legend)
+            if let set = dataSetDictionary.value(forKey: $0) {
+                dataSets.append(set)
+            }
+        }
 
         return .init(
-            dataSets: Array(dataSetDictionary.values),
-            legendEntries: ChartMappingModels.PowerSupplyType.legendEntries,
+            dataSets: dataSets,
+            legendEntries: legendEntries,
             formatter: ChartDateAxisFormatter(timestampsDict: timestampsDict)
         )
     }

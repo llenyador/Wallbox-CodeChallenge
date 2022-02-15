@@ -41,13 +41,12 @@ final class HistoricalDataRemoteDataSourceTests: XCTestCase {
         let output = try awaitPublisher(publisher)
         XCTAssertEqual(output, expectedOutput)
         
-        networkClientMock.verify(
+        networkClientMock.verifyOnce(
             .perform(
                 endpoint: .value(endpoint),
                 arrayMapper: .any(HistoricalDataDTOToHistoricalDataMapper.Type.self),
                 waitsUntilConnected: .value(false)
-            ),
-            count: .once
+            )
         )
     }
 
@@ -68,13 +67,12 @@ final class HistoricalDataRemoteDataSourceTests: XCTestCase {
         assertError(optionalError,
                     isEqualToExpectedError: expectedError)
         
-        networkClientMock.verify(
+        networkClientMock.verifyOnce(
             .perform(
                 endpoint: .value(endpoint),
                 arrayMapper: .any(HistoricalDataDTOToHistoricalDataMapper.Type.self),
                 waitsUntilConnected: .value(false)
-            ),
-            count: .once
+            )
         )
     }
 }

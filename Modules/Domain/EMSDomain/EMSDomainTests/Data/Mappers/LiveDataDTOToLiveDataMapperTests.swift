@@ -12,15 +12,9 @@ import SharedTestingUtilities
 final class LiveDataDTOToLiveDataMapperTests: XCTestCase {
     func test() throws {
         let input = LiveDataDTO.any
-        var quasarStatus: QuasarPowerStatus
-        if input.quasarsPower >= 0 {
-            quasarStatus = .consumingEnergy(abs(input.quasarsPower))
-        } else {
-            quasarStatus = .supplyingEnergy(abs(input.quasarsPower))
-        }
         let expectedOutput = LiveData(
             solarPower: input.solarPower,
-            quasarsPowerStatus: quasarStatus,
+            quasarsPowerStatus: try QuasarPowerToQuasarsPoweStatusMapper.map(input.quasarsPower),
             gridPower: input.gridPower,
             buildingDemandPower: input.buildingDemand,
             systemSoc: input.systemSoc,

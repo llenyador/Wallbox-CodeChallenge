@@ -35,8 +35,7 @@ final class HistoricalDataDataRepositoryTests: XCTestCase {
         let output = try awaitPublisher(publisher)
         XCTAssertEqual(output, expectedOutput)
         
-        remoteDataSourceMock.verify(.getHistoricalData(),
-                                    count: .once)
+        remoteDataSourceMock.verifyOnce(.getHistoricalData())
     }
 
     func testGetHistoricalDataFailure() throws {
@@ -50,8 +49,7 @@ final class HistoricalDataDataRepositoryTests: XCTestCase {
         assertError(optionalError,
                     isEqualToExpectedError: expectedError)
         
-        remoteDataSourceMock.verify(.getHistoricalData(),
-                                    count: .once)
+        remoteDataSourceMock.verifyOnce(.getHistoricalData())
     }
 }
 

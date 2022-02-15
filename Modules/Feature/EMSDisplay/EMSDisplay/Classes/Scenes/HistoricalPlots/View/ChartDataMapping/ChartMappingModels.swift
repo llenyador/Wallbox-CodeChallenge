@@ -53,11 +53,5 @@ enum ChartMappingModels {
                 formColor: color
             )
         }
-
-        static var legendEntries: [LegendEntry] {
-            allCases.map {
-                $0.legend
-            }
-        }
     }
 }
