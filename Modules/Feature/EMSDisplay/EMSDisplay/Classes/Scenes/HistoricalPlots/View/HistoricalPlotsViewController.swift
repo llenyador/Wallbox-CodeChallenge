@@ -1,19 +1,18 @@
 //
-//  DashboardViewController.swift
+//  HistoricalPlotsViewController.swift
 //  Pods
 //
-//  Created by Aitor Salvador on 10/2/22.
+//  Created by Aitor Salvador on 13/2/22.
 //  Copyright (c) 2022 Aitor Salvador. All rights reserved.
 //
 
 import CoreLayout
-import SharedUtilities
 
-final class DashboardViewController: BaseViewController {
-    private let _view: DashboardView
-    var interactor: DashboardInteractorProtocol!
+final class HistoricalPlotsViewController: BaseViewController {
+    private let _view: HistoricalPlotsView
+    var interactor: HistoricalPlotsInteractorProtocol!
     
-    init(view: DashboardView) {
+    init(view: HistoricalPlotsView) {
         _view = view
         super.init(nibName: nil, bundle: nil)
     }
@@ -36,9 +35,9 @@ final class DashboardViewController: BaseViewController {
     }
 }
 
-// MARK: - DashboardViewControllerProtocol
-extension DashboardViewController: DashboardViewControllerProtocol {
-    func display(state: DashboardModels.ViewState) {
+// MARK: - HistoricalPlotsViewControllerProtocol
+extension HistoricalPlotsViewController: HistoricalPlotsViewControllerProtocol {
+    func display(state: HistoricalPlotsModels.ViewState) {
         _view.loadingView.displayAnimating(state == .loading)
         switch state {
         case .loading:
@@ -48,29 +47,17 @@ extension DashboardViewController: DashboardViewControllerProtocol {
             _view.scrollView.isHidden = true
             _view.errorLabel.isHidden = false
             _view.errorLabel.text = message
-        case let .showData(viewModel):
+        case let .showData(chartModel):
             _view.scrollView.isHidden = false
             _view.errorLabel.isHidden = true
-            _view.display(viewModel: viewModel)
+            _view.chartView.display(model: chartModel)
         }
     }
 }
 
-// MARK: - DashboardViewControllerProtocol
-extension DashboardViewController: DashboardViewDelegate {
-    func didTapLiveStatsView() {
-        interactor.didTapLiveStatsView()
-    }
-}
-
 // MARK: - Setup methods
-private extension DashboardViewController {
+private extension HistoricalPlotsViewController {
     func setupView() {
-        title = "dashboard_title".localized
-        _view.delegate = self
+        title = "historical_plots_title".localized
     }
-}
-
-// MARK: - Private methods
-private extension DashboardViewController {
 }

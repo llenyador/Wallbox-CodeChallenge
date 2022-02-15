@@ -12,3 +12,4 @@ EMSDisplay-Unit-EMSDisplayTests:
   import:
   - SharedUtilities
   - Combine
+  - EMSDomain

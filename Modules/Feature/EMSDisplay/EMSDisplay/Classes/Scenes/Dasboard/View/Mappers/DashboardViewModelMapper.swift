@@ -27,10 +27,10 @@ private extension DashboardViewModelMapper {
         _ quasarStatus: DashboardModels.QuasarStatus
     ) -> GaugeInfoViewViewModel {
         switch quasarStatus {
-        case let .supplyingEnergy(powerSource):
+        case let .supplyingEnergy(energySource):
             return .init(infoText: "dashboard_quasars_supplying".localized,
                          value: Constants.gaugeMaxValue,
-                         valueText: mapMeasurementToText(powerSource.energy),
+                         valueText: mapMeasurementToText(energySource.energy),
                          style: .primary)
         case let .consumingEnergy(energy):
             return .init(infoText: "dashboard_quasars_consuming".localized,
@@ -44,10 +44,10 @@ private extension DashboardViewModelMapper {
         _ data: DashboardModels.Data
     ) -> LiveSessionViewViewModel {
         var optionalQuasarVM: VerticalLabelsStackViewModel?
-        if case let .supplyingEnergy(powerSource) = data.quasarStatus {
+        if case let .supplyingEnergy(energySource) = data.quasarStatus {
             optionalQuasarVM = .init(
                 topText: "dashboard_quasar_power".localized,
-                bottomText: mapMeasurementToText(powerSource.power)
+                bottomText: mapMeasurementToText(energySource.power)
             )
         }
         return LiveSessionViewViewModel(

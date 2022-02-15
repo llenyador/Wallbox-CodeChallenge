@@ -26,4 +26,8 @@ public extension BinaryFloatingPoint {
         let numerator = doubleValue * divisor
         return Self(Foundation.round(numerator) / divisor)
     }
+
+    var negated: Self {
+        -self
+    }
 }

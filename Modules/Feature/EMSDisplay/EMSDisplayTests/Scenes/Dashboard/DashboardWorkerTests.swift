@@ -52,6 +52,18 @@ final class DashboardWorkerTests: XCTestCase {
         XCTAssertEqual(output, expectedOutput)
         getLiveDataUseCaseMock.verifyOnce(.execute())
     }
+
+    func testGetDataError() throws {
+        let error = TestError.error1
+        getLiveDataUseCaseMock.given(
+            .execute(willReturn: .failure(error: error))
+        )
+
+        let publisher = worker.getLiveData()
+        let outputError = try waitForPublisherError(publisher)
+        assertError(outputError, isEqualToExpectedError: error)
+        getLiveDataUseCaseMock.verifyOnce(.execute())
+    }
 }
 
 // MARK: - Private methods

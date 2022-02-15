@@ -35,7 +35,7 @@ final class LiveDataDataRepositoryTests: XCTestCase {
         let output = try awaitPublisher(publisher)
         XCTAssertEqual(output, expectedLiveData)
         
-        remoteDataSourceMock.verify(.getLiveData(), count: .once)
+        remoteDataSourceMock.verifyOnce(.getLiveData())
     }
 
     func testGetLiveDataFailure() throws  {
@@ -49,7 +49,7 @@ final class LiveDataDataRepositoryTests: XCTestCase {
         assertError(optionalError,
                     isEqualToExpectedError: expectedError)
         
-        remoteDataSourceMock.verify(.getLiveData(), count: .once)
+        remoteDataSourceMock.verifyOnce(.getLiveData())
     }
 }
 

@@ -35,7 +35,7 @@ final class GetHistoricalDataUseCaseTests: XCTestCase {
         let output = try awaitPublisher(publisher)
         XCTAssertEqual(output, expectedOutput)
 
-        repositoryMock.verify(.getHistoricalData(), count: .once)
+        repositoryMock.verifyOnce(.getHistoricalData())
     }
 
     func testViewDidLoadFailure() throws {
@@ -48,8 +48,7 @@ final class GetHistoricalDataUseCaseTests: XCTestCase {
         let optionalError = try waitForPublisherError(publisher)
         assertError(optionalError, isEqualToExpectedError: expectedError)
 
-        repositoryMock.verify(.getHistoricalData(),
-                              count: .once)
+        repositoryMock.verifyOnce(.getHistoricalData())
     }
 }
 
