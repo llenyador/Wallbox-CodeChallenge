@@ -15,6 +15,7 @@ def test_pods
   pod 'CoreLayoutTestingUtilities', :path => 'Modules/Core/CoreLayout'
   pod 'CoreLayoutMocks', :path => 'Modules/Core/CoreLayout'
   pod 'EMSDomainMocks', :path => 'Modules/Domain/EMSDomain'
+  pod 'EMSDisplayMocks', :path => 'Modules/Feature/EMSDisplay'
 end
 
 def feature_pods

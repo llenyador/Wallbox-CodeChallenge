@@ -6,6 +6,7 @@
 //
 
 import SnapshotTesting
+import SharedUtilities
 import XCTest
 
 public extension XCTestCase {
@@ -78,6 +79,7 @@ open class SnapshotTestCase: XCTestCase {
     ///   - line: Snapshot line
     public func assertSnapshots(
         for viewController: UIViewController,
+        asyncWaitTime waitingTime: TimeInterval?,
         as config: [SnapshottingDevice] = [
             .image(on: .iPhoneXr),
             .image(on: .iPhone8)
@@ -91,14 +93,18 @@ open class SnapshotTestCase: XCTestCase {
         waitFor duration: TimeInterval? = nil) {
         let devices = mapDevices(config, by: duration)
 
-        let snapshotsDirectory = "Snapshots/\(file)"
         devices.forEach {
+            var strategy: Snapshotting<UIViewController, UIImage>
+            if let waitingTime = waitingTime {
+                strategy = .wait(for: waitingTime, on: $0)
+            } else {
+                strategy = $0
+            }
             let failure = verifySnapshot(
                 matching: viewController,
-                as: $0,
+                as: strategy,
                 named: name,
                 record: recording || isRecording,
-                snapshotDirectory: snapshotsDirectory,
                 timeout: timeout,
                 file: file,
                 testName: testName,
@@ -112,6 +118,7 @@ open class SnapshotTestCase: XCTestCase {
     func assertSnapshots(
         ofScrollView scrollView: UIScrollView,
         in vc: UIViewController,
+        asyncWaitTime waitingTime: TimeInterval?,
         as config: [ViewImageConfig] = [
             .iPhoneXr,
             .iPhone8
@@ -125,7 +132,6 @@ open class SnapshotTestCase: XCTestCase {
         testName: String = #function,
         line: UInt = #line
     ) {
-        let snapshotsDirectory = "Snapshots/\(file)"
         config.forEach {
             let viewConfig = $0
             vc.view.bounds.size = viewConfig.size.orZero
@@ -147,19 +153,25 @@ open class SnapshotTestCase: XCTestCase {
 
             let height = fixedHeight ?? (scrollViewHeight(scrollView, in: viewConfig) + extraTop)
             let size = CGSize(width: width, height: height + additionalHeight)
-
+            
+            let vcStrategy: Snapshotting<UIViewController, UIImage> = .image(
+                on: .init(
+                    safeArea: .zero,
+                    size: size,
+                    traits: .init()
+                )
+            )
+            var strategy: Snapshotting<UIViewController, UIImage>
+            if let waitingTime = waitingTime {
+                strategy = .wait(for: waitingTime, on: vcStrategy)
+            } else {
+                strategy = vcStrategy
+            }
             let failure = verifySnapshot(
                 matching: vc,
-                as: .image(on:
-                            .init(
-                                safeArea: .zero,
-                                size: size,
-                                traits: .init()
-                            )
-                ),
+                as: strategy,
                 named: name,
                 record: recording || isRecording,
-                snapshotDirectory: snapshotsDirectory,
                 file: file,
                 testName: testName,
                 line: line
@@ -176,6 +188,7 @@ open class SnapshotTestCase: XCTestCase {
 public extension SnapshotTestCase {
     func assertSnapshotsOfFirstScrollView(
         in navigationController: UINavigationController,
+        asyncWaitTime: TimeInterval?,
         file: StaticString = #file,
         line: UInt = #line,
         testName: String = #function
@@ -188,6 +201,7 @@ public extension SnapshotTestCase {
         }
         assertSnapshots(ofScrollView: scrollView,
                         in: navigationController,
+                        asyncWaitTime: asyncWaitTime,
                         file: file,
                         testName: testName,
                         line: line)

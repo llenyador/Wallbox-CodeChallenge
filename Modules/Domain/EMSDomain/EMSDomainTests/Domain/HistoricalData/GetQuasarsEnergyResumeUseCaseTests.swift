@@ -125,11 +125,3 @@ private extension QuasarsEnergyResume {
         )
     }
 }
-
-private let halfHourInSeconds: TimeInterval = 3600 / 2
-
-private func advancingHalfAnHour(_ date: inout Date) -> Date {
-    let newDate = date.advanced(by: halfHourInSeconds)
-    date = newDate
-    return newDate
-}

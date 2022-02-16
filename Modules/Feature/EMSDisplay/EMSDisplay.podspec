@@ -39,6 +39,8 @@ Pod::Spec.new do |s|
       test_spec.dependency 'SharedTestingUtilities'
       test_spec.dependency 'SnapshotTesting'
       test_spec.dependency 'CoreLayoutMocks'
+      test_spec.dependency 'CoreLayoutTestingUtilities'
+      test_spec.dependency 'EMSDisplayMocks'
       test_spec.requires_app_host = true
   end
 end

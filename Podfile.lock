@@ -30,9 +30,16 @@ PODS:
   - EMSDisplay/EMSDisplayUITests (0.1.0):
     - CoreLayout
     - CoreLayoutMocks
+    - CoreLayoutTestingUtilities
+    - EMSDisplayMocks
     - EMSDomain
     - SharedTestingUtilities
     - SnapshotTesting
+  - EMSDisplayMocks (0.1.0):
+    - CoreLayoutMocks
+    - EMSDisplay
+    - EMSDomainMocks
+    - SharedTestingUtilities
   - EMSDomain (0.1.0):
     - SharedUtilities
   - EMSDomain/EMSDomainTests (0.1.0):
@@ -73,6 +80,7 @@ DEPENDENCIES:
   - EMSDisplay (from `Modules/Feature/EMSDisplay`)
   - EMSDisplay/EMSDisplayTests (from `Modules/Feature/EMSDisplay`)
   - EMSDisplay/EMSDisplayUITests (from `Modules/Feature/EMSDisplay`)
+  - EMSDisplayMocks (from `Modules/Feature/EMSDisplay`)
   - EMSDomain (from `Modules/Domain/EMSDomain`)
   - EMSDomain/EMSDomainTests (from `Modules/Domain/EMSDomain`)
   - EMSDomainMocks (from `Modules/Domain/EMSDomain`)
@@ -103,6 +111,8 @@ EXTERNAL SOURCES:
     :path: Modules/Core/CoreLayout
   EMSDisplay:
     :path: Modules/Feature/EMSDisplay
+  EMSDisplayMocks:
+    :path: Modules/Feature/EMSDisplay
   EMSDomain:
     :path: Modules/Domain/EMSDomain
   EMSDomainMocks:
@@ -119,7 +129,8 @@ SPEC CHECKSUMS:
   CoreLayout: e5039e5b0a3aee5a891f2b83ff030007dce14611
   CoreLayoutMocks: 1a022ba226cbd30ee80ad35cd119693fd3993efa
   CoreLayoutTestingUtilities: 11e2976bc2b9b284e8d1acc9801146bbe3be671c
-  EMSDisplay: 167b75e8f932dfbeec6bb2f98ca753066a1a559d
+  EMSDisplay: 3e9abe2811a2295f060c899e2fb709e3b37921ed
+  EMSDisplayMocks: a48a17ae5e1e2a6bf830fb718724f00f1ca68713
   EMSDomain: 0d3bc41caccd3a6aa661e160b4229bf1c7efd0ba
   EMSDomainMocks: 6e23f48598d4c9b5180ec37bb7f277858a72ce4a
   GaugeKit: b09f41f141511c172a606403e71adf8e9b6008b3
@@ -135,6 +146,6 @@ SPEC CHECKSUMS:
   SwiftMessages: 9cca50659fa22bb523b4dd2a958d4442e843a354
   SwiftyMocky: 014739247afadb65efb5bb92ede32c22b9365762
 
-PODFILE CHECKSUM: f3277b0b3a6d50cc086d855489ecb574edb77bc9
+PODFILE CHECKSUM: 2617af60ebeb5fe794240adccdc721d5d47685a3
 
 COCOAPODS: 1.11.2
