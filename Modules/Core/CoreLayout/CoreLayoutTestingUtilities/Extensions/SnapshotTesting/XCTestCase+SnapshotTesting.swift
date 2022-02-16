@@ -9,44 +9,6 @@ import SnapshotTesting
 import SharedUtilities
 import XCTest
 
-public extension XCTestCase {
-    func launchSnapshot(for vc: UIViewController,
-                        customHeight: CGFloat? = nil,
-                        file: StaticString = #file,
-                        testName: String = #function,
-                        line: UInt = #line) {
-
-        var device = [
-            ViewImageConfig.iPhoneX,
-            ViewImageConfig.iPhone8
-        ]
-
-        if let customHeight = customHeight {
-            let width = UIScreen.main.bounds.size.width
-            device.append(
-                ViewImageConfig(
-                    safeArea: .zero,
-                    size: CGSize(width: width,
-                                 height: customHeight),
-                    traits: .init()
-                )
-            )
-        }
-
-        device.forEach {
-            assertSnapshot(
-                matching: vc,
-                as: .image(on: $0),
-                file: file,
-                testName: testName,
-                line: line
-            )
-        }
-    }
-}
-
-
-
 /// Snapshot test case
 open class SnapshotTestCase: XCTestCase {
     public typealias SnapshottingDevice = Snapshotting<UIViewController, UIImage>

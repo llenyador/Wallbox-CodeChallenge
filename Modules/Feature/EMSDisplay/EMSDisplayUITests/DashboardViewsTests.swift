@@ -18,6 +18,7 @@ final class DashboardViewsTests: SnapshotTestCase {
 
     override func setUp() {
         super.setUp()
+        isRecording = true
         setupDependencies()
     }
 
@@ -38,7 +39,7 @@ final class DashboardViewsTests: SnapshotTestCase {
         let viewModel = try DashboardViewModelMapper.map(data)
         viewController.display(state: .showData(viewModel))
         assertSnapshotsOfFirstScrollView(in: navigationController,
-                                         asyncWaitTime: 0.3)
+                                         asyncWaitTime: 1)
     }
 
     func testViewWithQuasarsConsuming() throws {
@@ -46,7 +47,7 @@ final class DashboardViewsTests: SnapshotTestCase {
         let viewModel = try DashboardViewModelMapper.map(data)
         viewController.display(state: .showData(viewModel))
         assertSnapshotsOfFirstScrollView(in: navigationController,
-                                         asyncWaitTime: 0.3)
+                                         asyncWaitTime: 1)
     }
 
     func testError() {
