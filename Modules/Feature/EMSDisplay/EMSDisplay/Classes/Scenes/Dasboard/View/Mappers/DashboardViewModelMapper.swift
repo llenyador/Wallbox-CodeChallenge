@@ -12,36 +12,36 @@ import SharedUtilities
 enum DashboardViewModelMapper: MapperProtocol {
     static func map(_ input: DashboardModels.Data) throws -> DashboardModels.ViewModel {
         DashboardModels.ViewModel(
-            gaugeInfo: [
-                mapQuasarStatus(input.quasarStatus)
-            ],
-            liveSessionVM: mapToLiveSessionVM(input),
-            liveStatsVM: mapToLiveStatsVM(input)
+            gaugeInfo: mapQuasarsResumeToGaugeVMs(input.quasarsEnergyResume),
+            liveSessionVM: mapToLiveSessionVM(input.liveData),
+            liveStatsVM: mapToLiveStatsVM(input.liveData)
         )
     }
 }
 
 // MARK: - Private methods
 private extension DashboardViewModelMapper {
-    static func mapQuasarStatus(
-        _ quasarStatus: DashboardModels.QuasarStatus
-    ) -> GaugeInfoViewViewModel {
-        switch quasarStatus {
-        case let .supplyingEnergy(energySource):
-            return .init(infoText: "dashboard_quasars_supplying".localized,
-                         value: Constants.gaugeMaxValue,
-                         valueText: mapMeasurementToText(energySource.energy),
-                         style: .primary)
-        case let .consumingEnergy(energy):
-            return .init(infoText: "dashboard_quasars_consuming".localized,
-                         value: Constants.gaugeMaxValue,
-                         valueText: mapMeasurementToText(energy),
-                         style: .red)
-        }
+    static func mapQuasarsResumeToGaugeVMs(
+        _ quasarsData: DashboardModels.QuasarsEnergyResume
+    ) -> [GaugeInfoViewViewModel] {
+        [
+            .init(
+                infoText: "dashboard_quasars_supplying".localized,
+                value: normalizePercentageTo1(quasarsData.suppliedEnergyPercentage),
+                valueText: mapMeasurementToText(quasarsData.suppliedEnergy),
+                style: .primary
+            ),
+            .init(
+                infoText: "dashboard_quasars_consuming".localized,
+                value: normalizePercentageTo1(quasarsData.consumedEnergyPercentage),
+                valueText: mapMeasurementToText(quasarsData.consumedEnergy),
+                style: .red
+            )
+        ]
     }
 
     static func mapToLiveSessionVM(
-        _ data: DashboardModels.Data
+        _ data: DashboardModels.LiveData
     ) -> LiveSessionViewViewModel {
         var optionalQuasarVM: VerticalLabelsStackViewModel?
         if case let .supplyingEnergy(energySource) = data.quasarStatus {
@@ -69,7 +69,7 @@ private extension DashboardViewModelMapper {
     }
 
     static func mapToLiveStatsVM(
-        _ data: DashboardModels.Data
+        _ data: DashboardModels.LiveData
     ) -> LiveStatsViewViewModel {
         var gaugeVMs: [GaugeInfoViewViewModel] = []
 
@@ -124,6 +124,5 @@ private extension DashboardViewModelMapper {
 private extension DashboardViewModelMapper {
     enum Constants {
         static let normalizeTo1Divisor: Double = 100
-        static let gaugeMaxValue: CGFloat = 1
     }
 }

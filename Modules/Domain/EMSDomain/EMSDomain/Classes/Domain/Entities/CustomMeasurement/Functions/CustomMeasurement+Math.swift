@@ -5,6 +5,8 @@
 //  Created by Aitor Salvador on 12/2/22.
 //
 
+import SharedUtilities
+
 public func abs<Unit: UnitProtocol>(_ measurement: CustomMeasurement<Unit>) -> CustomMeasurement<Unit> {
     .init(abs(measurement.value))
 }
@@ -51,3 +53,12 @@ public func /<Unit: UnitProtocol>(
     .init(lhs / rhs.value)
 }
 
+public extension CustomMeasurement {
+    func asPercentage(
+        forTotal total: Self
+    ) -> Double {
+        (
+            (value / total.value) * 100
+        ).round(toDecimals: 2)
+    }
+}
