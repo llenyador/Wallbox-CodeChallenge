@@ -23,7 +23,7 @@ public enum UIConstants {
     public static let spacing70: CGFloat = 70
     public static let spacing100: CGFloat = 20
     
-    public static let cellMargin: CGFloat = spacing20
+    public static let hMargin: CGFloat = spacing20
 
     public static let lineWidth: CGFloat = 1
     public static let textInputPadding: CGFloat = 10

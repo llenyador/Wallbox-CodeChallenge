@@ -1,0 +1,15 @@
+sourceryCommand: null
+EMSDisplay-Unit-EMSDisplayTests:
+  sources:
+    include:
+    - ./EMSDisplay/Classes
+    - ./../../Core/SharedUtilities/SharedUtilities/Classes
+  output: ./EMSDisplayTests/Mock.generated.swift
+  targets:
+  - EMSDisplay_Tests
+  testable:
+  - EMSDisplay
+  import:
+  - SharedUtilities
+  - Combine
+  - EMSDomain

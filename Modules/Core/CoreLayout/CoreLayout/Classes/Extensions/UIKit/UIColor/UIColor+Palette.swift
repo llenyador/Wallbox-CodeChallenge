@@ -9,9 +9,9 @@
 import UIKit
 
 public extension UIColor {
-    static let primary: UIColor = .red
-    static let primaryLight: UIColor = .red.withAlphaComponent(0.8)
-    static let primaryDark: UIColor = .red.withAlphaComponent(0.6)
+    static let primary: UIColor = .wallboxGreen
+    static let primaryLight: UIColor = .primary.withAlphaComponent(0.8)
+    static let primaryDark: UIColor = .primary.withAlphaComponent(0.6)
 
     static let secondary: UIColor = .bumbleWeed
     static let secondaryLight: UIColor = .bumbleWeedLight
@@ -29,6 +29,7 @@ public extension UIColor {
 }
 
 private extension UIColor {
+    static var wallboxGreen: UIColor = .init(hexString: "316650")
     static var bumbleWeed: UIColor = .init(hexString: "EEB899")
     static var bumbleWeedLight: UIColor = .init(hexString: "ffeaca")
     static var bumbleWeedDark: UIColor = .init(hexString: "ba886b")
