@@ -12,4 +12,11 @@ public enum EnergyConversion {
         let hour: CustomMeasurement<Hour> = 1
         return kW * hour
     }
+
+    public static func convertToKWh(
+        _ kW: CustomMeasurement<KiloWatt>,
+        inPeriod time: CustomMeasurement<Hour>
+    ) -> CustomMeasurement<KiloWattHour> {
+        kW * time
+    }
 }

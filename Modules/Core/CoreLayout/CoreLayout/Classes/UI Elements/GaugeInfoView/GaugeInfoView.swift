@@ -117,7 +117,6 @@ private extension GaugeInfoView {
     }
 
     func display(_ style: GaugeInfoViewViewModel.Style) {
-        gauge.reverse = style == .red
         switch style {
         case .white:
             gauge.startColor = .white
