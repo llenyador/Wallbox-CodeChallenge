@@ -70,7 +70,3 @@ private extension DashboardViewController {
         _view.delegate = self
     }
 }
-
-// MARK: - Private methods
-private extension DashboardViewController {
-}
