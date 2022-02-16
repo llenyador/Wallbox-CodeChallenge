@@ -61,6 +61,26 @@ extension HistoricalData: AnyCreatable {
     }
 }
 
+extension HistoricalData {
+    typealias CustomizedData = (quasarsStatus: QuasarPowerStatus, timestamp: Date)
+}
+
+extension Array where Element == HistoricalData {
+    static func any(
+        customizedData: [HistoricalData.CustomizedData]
+    ) -> Self {
+        customizedData.map { input in
+                .init(
+                    buildingActivePower: .any,
+                    gridActivePower: .any,
+                    pvActivePower: .any,
+                    quasarsActivePowerStatus: input.quasarsStatus,
+                    timestamp: input.timestamp
+                )
+        }
+    }
+}
+
 extension HistoricalDataDTO: AnyCreatable {
     public static var any: Self {
         .init(
@@ -84,5 +104,14 @@ extension LiveDataDTO: AnyCreatable {
             totalEnergy: .any,
             currentEnergy: .any
         )
+    }
+}
+
+extension QuasarsEnergyResume: AnyCreatable {
+    public static var any: Self {
+        .init(consumedEnergy: .any,
+              suppliedEnergy: .any,
+              suppliedEnergyPercentage: .any,
+              consumedEnergyPercentage: .any)
     }
 }

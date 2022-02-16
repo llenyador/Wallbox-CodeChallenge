@@ -50,7 +50,7 @@ private extension DashboardInteractor {
     func getDashboardData() {
         presenter.presentLoading()
 
-        worker.getLiveData()
+        worker.getData()
             .receive(on: scheduler)
             .sink(onSuccess: { [weak self] data in
                 guard let self = self else {

@@ -12,50 +12,60 @@ import SharedUtilities
 
 // sourcery: AutoMockable
 protocol DashboardWorkerProtocol {
-    func getLiveData() -> PublisherResult<DashboardModels.Data>
+    func getData() -> PublisherResult<DashboardModels.Data>
 }
 
 // MARK: - DashboardWorker
 struct DashboardWorker {
     private let getLiveDataUseCase: GetLiveDataUseCaseProtocol
+    private let getQuasarsEnergyResumeUseCase: GetQuasarsEnergyResumeUseCaseProtocol
 
     init(
-        getLiveDataUseCase: GetLiveDataUseCaseProtocol
+        getLiveDataUseCase: GetLiveDataUseCaseProtocol,
+        getQuasarsEnergyResumeUseCase: GetQuasarsEnergyResumeUseCaseProtocol
     ) {
         self.getLiveDataUseCase = getLiveDataUseCase
+        self.getQuasarsEnergyResumeUseCase = getQuasarsEnergyResumeUseCase
     }
 }
 
 // MARK: - DashboardWorkerProtocol
 extension DashboardWorker: DashboardWorkerProtocol {
-    func getLiveData() -> PublisherResult<DashboardModels.Data> {
-        getLiveDataUseCase.execute()
-            .map {
-                mapToDashboardLiveData($0)
-            }.eraseToAnyPublisher()
+    func getData() -> PublisherResult<DashboardModels.Data> {
+        Publishers.Zip(
+            getDashboardLiveData(),
+            getQuasarsEnergyResumeUseCase.execute()
+        ).map { liveData, quasarsEnergyResume in
+                .init(
+                    quasarsEnergyResume: quasarsEnergyResume,
+                    liveData: liveData
+                )
+        }.eraseToAnyPublisher()
     }
 }
 
 // MARK: - Private methods
 private extension DashboardWorker {
+    func getDashboardLiveData() -> PublisherResult<DashboardModels.LiveData> {
+        getLiveDataUseCase.execute()
+            .map {
+                mapToDashboardLiveData($0)
+            }.eraseToAnyPublisher()
+    }
+    
     func mapToDashboardLiveData(
         _ liveData: LiveData
-    ) -> DashboardModels.Data {
-        
+    ) -> DashboardModels.LiveData {
         let solarPower = DashboardModels.EnergySource(
             power: liveData.solarPower,
-            energy: EnergyConversion.convertToKWh(liveData.solarPower),
-            suppliedPercentage: percentageFor(
-                liveData.solarPower,
-                buildingDemandPower: liveData.buildingDemandPower
+            suppliedPercentage: liveData.solarPower.asPercentage(
+                forTotal: liveData.buildingDemandPower
             )
         )
         let gridPower = DashboardModels.EnergySource(
             power: liveData.gridPower,
-            energy: EnergyConversion.convertToKWh(liveData.gridPower),
-            suppliedPercentage: percentageFor(
-                liveData.gridPower,
-                buildingDemandPower: liveData.buildingDemandPower
+            suppliedPercentage: liveData.gridPower.asPercentage(
+                forTotal: liveData.buildingDemandPower
             )
         )
 
@@ -69,33 +79,21 @@ private extension DashboardWorker {
 
     func mapToQuasarsStatus(
         _ liveData: LiveData
-    ) -> DashboardModels.QuasarStatus {
+    ) -> DashboardModels.DashboardQuasarStatus {
         let quasarsPower = liveData.quasarsPowerStatus.power
-        let quasarEnergy = EnergyConversion.convertToKWh(quasarsPower)
         switch liveData.quasarsPowerStatus {
         case .supplyingEnergy:
             let energySource = DashboardModels.EnergySource(
                 power: quasarsPower,
-                energy: EnergyConversion.convertToKWh(quasarsPower),
-                suppliedPercentage: percentageFor(
-                    quasarsPower,
-                    buildingDemandPower: liveData.buildingDemandPower
+                suppliedPercentage: quasarsPower.asPercentage(
+                    forTotal: liveData.buildingDemandPower
                 )
             )
             return .supplyingEnergy(energySource)
             
         case .consumingEnergy:
-            return .consumingEnergy(quasarEnergy)
+            return .consumingEnergy
         }
-    }
-
-    func percentageFor(
-        _ power: CustomMeasurement<KiloWatt>,
-        buildingDemandPower: CustomMeasurement<KiloWatt>
-    ) -> Double {
-        (
-            (power.value / buildingDemandPower.value) * 100
-        ).round(toDecimals: 2)
     }
 }
 

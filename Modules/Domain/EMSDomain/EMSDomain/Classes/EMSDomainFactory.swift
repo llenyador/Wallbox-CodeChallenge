@@ -17,4 +17,10 @@ public enum EMSDomainFactory {
             dataRepository: DataFactory.HistoricalData.build()
         )
     }
+
+    public static func build() -> GetQuasarsEnergyResumeUseCaseProtocol {
+        GetQuasarsEnergyResumeUseCase(
+            dataRepository: DataFactory.HistoricalData.build()
+        )
+    }
 }

@@ -6,7 +6,7 @@
 //
 
 public struct CustomMeasurement<Unit: UnitProtocol> {
-    public let value: Double
+    public var value: Double
 
     public init(_ value: Double) {
         self.value = value
@@ -29,6 +29,7 @@ public extension CustomMeasurement {
 // MARK: - Equatable
 extension CustomMeasurement: Equatable {}
 
+// MARK: - Comparable
 extension CustomMeasurement: Comparable {
     public static func < (lhs: CustomMeasurement<Unit>, rhs: CustomMeasurement<Unit>) -> Bool {
         lhs.value < rhs.value

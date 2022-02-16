@@ -14,6 +14,15 @@ import SharedTestingUtilities
 extension DashboardModels.Data: AnyCreatable {
     public static var any: Self {
         .init(
+            quasarsEnergyResume: .any,
+            liveData: .any
+        )
+    }
+}
+
+extension DashboardModels.LiveData: AnyCreatable {
+    public static var any: Self {
+        .init(
             quasarStatus: .any,
             solarPower: .any,
             gridPower: .any,
@@ -21,7 +30,7 @@ extension DashboardModels.Data: AnyCreatable {
         )
     }
 
-    public static func any(quasarStatus: DashboardModels.QuasarStatus) -> Self {
+    public static func any(quasarStatus: DashboardModels.DashboardQuasarStatus) -> Self {
         .init(
             quasarStatus: quasarStatus,
             solarPower: .any,
@@ -31,10 +40,10 @@ extension DashboardModels.Data: AnyCreatable {
     }
 }
 
-extension DashboardModels.QuasarStatus: CaseIterable {
+extension DashboardModels.DashboardQuasarStatus: CaseIterable {
     public static var allCases: [Self] {
         [
-            .consumingEnergy(.any),
+            .consumingEnergy,
             .supplyingEnergy(.any)
         ]
     }
@@ -43,7 +52,6 @@ extension DashboardModels.QuasarStatus: CaseIterable {
 extension DashboardModels.EnergySource: AnyCreatable {
     public static var any: Self {
         .init(power: .any,
-              energy: .any,
               suppliedPercentage: .any)
     }
 }

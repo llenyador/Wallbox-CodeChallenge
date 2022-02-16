@@ -28,7 +28,7 @@ public final class ChartView: UIView {
         xAxis.labelPosition = .bottom
         xAxis.labelFont = .systemFont(ofSize: 12)
         xAxis.labelCount = Constants.xLabelCount
-        
+
         let leftAxis = $0.leftAxis
         leftAxis.labelFont = .systemFont(ofSize: 12)
         leftAxis.labelCount = Constants.yLabelCount

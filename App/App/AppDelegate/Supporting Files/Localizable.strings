@@ -8,8 +8,8 @@
 
 // MARK: - Dashboard
 "dashboard_title" = "Dashboard";
-"dashboard_quasars_supplying" = "Quasars supplying energy";
-"dashboard_quasars_consuming" = "Quasars consuming energy";
+"dashboard_quasars_supplying" = "Quasars supplied energy";
+"dashboard_quasars_consuming" = "Quasars consumed energy";
 "dashboard_live_session_title" = "Current session";
 "dashboard_quasar_power" = "Quasar power";
 "dashboard_solar_power" = "Solar power";
