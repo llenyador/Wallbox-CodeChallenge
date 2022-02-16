@@ -59,15 +59,15 @@ extension DashboardModels {
     }
 
     struct LiveData {
-        let quasarStatus: QuasarStatus
+        let quasarStatus: DashboardQuasarStatus
         let solarPower: EnergySource
         let gridPower: EnergySource
         let buildingDemandPower: CustomMeasurement<KiloWatt>
     }
 
-    enum QuasarStatus {
+    enum DashboardQuasarStatus {
         case supplyingEnergy(EnergySource)
-        case consumingEnergy(CustomMeasurement<KiloWattHour>)
+        case consumingEnergy
     }
 
     struct EnergySource {

@@ -41,3 +41,12 @@ extension HistoricalData: Equatable {
         lhs.timestamp == rhs.timestamp
     }
 }
+
+extension QuasarsEnergyResume: Equatable {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.consumedEnergy == rhs.consumedEnergy &&
+        lhs.suppliedEnergy == rhs.suppliedEnergy &&
+        lhs.suppliedEnergyPercentage == rhs.suppliedEnergyPercentage &&
+        lhs.consumedEnergyPercentage == rhs.consumedEnergyPercentage
+    }
+}

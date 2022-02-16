@@ -38,13 +38,13 @@ final class DashboardInteractorTests: XCTestCase {
         let publisher = scheduler.scheduleSuccessPublisher(atVirtualTime: 1,
                                                            returnedData: expectedOutput)
 
-        workerMock.given(.getLiveData(willReturn: publisher))
+        workerMock.given(.getData(willReturn: publisher))
 
         interactor.viewDidLoad()
 
         scheduler.advance(by: 1)
 
-        workerMock.verifyOnce(.getLiveData())
+        workerMock.verifyOnce(.getData())
         presenterMock.verifyOnce(.present(data: .value(expectedOutput)))
         presenterMock.verifyOnce(.presentLoading())
     }
@@ -57,13 +57,13 @@ final class DashboardInteractorTests: XCTestCase {
             error: expectedError
         )
 
-        workerMock.given(.getLiveData(willReturn: publisher))
+        workerMock.given(.getData(willReturn: publisher))
 
         interactor.viewDidLoad()
 
         scheduler.advance(by: 1)
 
-        workerMock.verifyOnce(.getLiveData())
+        workerMock.verifyOnce(.getData())
         presenterMock.verifyOnce(.present(error: .value(expectedError)))
     }
 

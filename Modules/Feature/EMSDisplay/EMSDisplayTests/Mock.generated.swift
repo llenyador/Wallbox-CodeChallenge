@@ -969,38 +969,38 @@ open class DashboardWorkerProtocolMock: DashboardWorkerProtocol, Mock {
 
 
 
-    open func getLiveData() -> PublisherResult<DashboardModels.Data> {
-        addInvocation(.m_getLiveData)
-		let perform = methodPerformValue(.m_getLiveData) as? () -> Void
+    open func getData() -> PublisherResult<DashboardModels.Data> {
+        addInvocation(.m_getData)
+		let perform = methodPerformValue(.m_getData) as? () -> Void
 		perform?()
 		var __value: PublisherResult<DashboardModels.Data>
 		do {
-		    __value = try methodReturnValue(.m_getLiveData).casted()
+		    __value = try methodReturnValue(.m_getData).casted()
 		} catch {
-			onFatalFailure("Stub return value not specified for getLiveData(). Use given")
-			Failure("Stub return value not specified for getLiveData(). Use given")
+			onFatalFailure("Stub return value not specified for getData(). Use given")
+			Failure("Stub return value not specified for getData(). Use given")
 		}
 		return __value
     }
 
 
     fileprivate enum MethodType {
-        case m_getLiveData
+        case m_getData
 
         static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Matcher.ComparisonResult {
             switch (lhs, rhs) {
-            case (.m_getLiveData, .m_getLiveData): return .match
+            case (.m_getData, .m_getData): return .match
             }
         }
 
         func intValue() -> Int {
             switch self {
-            case .m_getLiveData: return 0
+            case .m_getData: return 0
             }
         }
         func assertionName() -> String {
             switch self {
-            case .m_getLiveData: return ".getLiveData()"
+            case .m_getData: return ".getData()"
             }
         }
     }
@@ -1014,12 +1014,12 @@ open class DashboardWorkerProtocolMock: DashboardWorkerProtocol, Mock {
         }
 
 
-        public static func getLiveData(willReturn: PublisherResult<DashboardModels.Data>...) -> MethodStub {
-            return Given(method: .m_getLiveData, products: willReturn.map({ StubProduct.return($0 as Any) }))
+        public static func getData(willReturn: PublisherResult<DashboardModels.Data>...) -> MethodStub {
+            return Given(method: .m_getData, products: willReturn.map({ StubProduct.return($0 as Any) }))
         }
-        public static func getLiveData(willProduce: (Stubber<PublisherResult<DashboardModels.Data>>) -> Void) -> MethodStub {
+        public static func getData(willProduce: (Stubber<PublisherResult<DashboardModels.Data>>) -> Void) -> MethodStub {
             let willReturn: [PublisherResult<DashboardModels.Data>] = []
-			let given: Given = { return Given(method: .m_getLiveData, products: willReturn.map({ StubProduct.return($0 as Any) })) }()
+			let given: Given = { return Given(method: .m_getData, products: willReturn.map({ StubProduct.return($0 as Any) })) }()
 			let stubber = given.stub(for: (PublisherResult<DashboardModels.Data>).self)
 			willProduce(stubber)
 			return given
@@ -1029,15 +1029,15 @@ open class DashboardWorkerProtocolMock: DashboardWorkerProtocol, Mock {
     public struct Verify {
         fileprivate var method: MethodType
 
-        public static func getLiveData() -> Verify { return Verify(method: .m_getLiveData)}
+        public static func getData() -> Verify { return Verify(method: .m_getData)}
     }
 
     public struct Perform {
         fileprivate var method: MethodType
         var performs: Any
 
-        public static func getLiveData(perform: @escaping () -> Void) -> Perform {
-            return Perform(method: .m_getLiveData, performs: perform)
+        public static func getData(perform: @escaping () -> Void) -> Perform {
+            return Perform(method: .m_getData, performs: perform)
         }
     }
 
