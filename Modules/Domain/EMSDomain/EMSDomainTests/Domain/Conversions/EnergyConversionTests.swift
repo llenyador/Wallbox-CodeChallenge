@@ -10,11 +10,11 @@ import XCTest
 
 final class EnergyConversionTests: XCTestCase {
     func testKWtoKWH() {
-        let kw = Double.any
-        let kWH = kw
-        let expectedKWh = CustomMeasurement<KiloWattHour>(kWH)
-        let input = CustomMeasurement<KiloWatt>(kw)
-        let output = EnergyConversion.convertToKWh(input)
+        let kw = 20.doubleValue
+        let timeInput = CustomMeasurement<Hour>(0.5)
+        let powerInput = CustomMeasurement<KiloWatt>(kw)
+        let expectedKWh: CustomMeasurement<KiloWattHour> = 20 * 0.5
+        let output = EnergyConversion.convertToKWh(powerInput, inPeriod: timeInput)
         XCTAssertEqual(output, expectedKWh)
     }
 }
