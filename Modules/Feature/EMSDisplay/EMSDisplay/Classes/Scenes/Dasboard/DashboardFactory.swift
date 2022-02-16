@@ -50,7 +50,7 @@ private extension DashboardFactory {
     static func build() -> DashboardWorkerProtocol {
         DashboardWorker(
             getLiveDataUseCase: EMSDomainFactory.build(),
-            getHistoricalDataUseCase: EMSDomainFactory.build()
+            getQuasarsEnergyResumeUseCase: EMSDomainFactory.build()
         )
     }
     

@@ -79,9 +79,8 @@ private extension DashboardWorker {
 
     func mapToQuasarsStatus(
         _ liveData: LiveData
-    ) -> DashboardModels.QuasarStatus {
+    ) -> DashboardModels.DashboardQuasarStatus {
         let quasarsPower = liveData.quasarsPowerStatus.power
-        let quasarEnergy = EnergyConversion.convertToKWh(quasarsPower)
         switch liveData.quasarsPowerStatus {
         case .supplyingEnergy:
             let energySource = DashboardModels.EnergySource(
@@ -93,7 +92,7 @@ private extension DashboardWorker {
             return .supplyingEnergy(energySource)
             
         case .consumingEnergy:
-            return .consumingEnergy(quasarEnergy)
+            return .consumingEnergy
         }
     }
 }

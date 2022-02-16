@@ -22,7 +22,7 @@ enum DashboardViewModelMapper: MapperProtocol {
 // MARK: - Private methods
 private extension DashboardViewModelMapper {
     static func mapQuasarsResumeToGaugeVMs(
-        _ quasarsData: DashboardModels.QuasarsEnergyResume
+        _ quasarsData: QuasarsEnergyResume
     ) -> [GaugeInfoViewViewModel] {
         [
             .init(
