@@ -54,10 +54,10 @@ private extension GetQuasarsEnergyResumeUseCase {
         // the interval of time where all these samples were taken:
         // E = Pavg * (t_end - t_start)
         let suppliedAaveragePower: CustomMeasurement<KiloWatt> = {
-            suppliedPowerSum / data.count.doubleValue
+            .init(suppliedPowerSum.value / data.count.doubleValue)
         }()
         let consumedAveragePower: CustomMeasurement<KiloWatt> = {
-            consumedPowerSum / data.count.doubleValue
+            .init(consumedPowerSum.value / data.count.doubleValue)
         }()
         let consumedEnergy = EnergyConversion.convertToKWh(
             consumedAveragePower,

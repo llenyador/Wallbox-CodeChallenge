@@ -16,8 +16,28 @@ import Combine
 
 final class DashboardViewModelMapperTests: XCTestCase {
     func testQuasarStatusConsumingEnergy() throws {
-        let input = DashboardModels.Data.any
+        let input = DashboardModels.Data(
+            quasarsEnergyResume: .any,
+            liveData: .any(quasarStatus: .consumingEnergy)
+        )
         let expectedOutput = DashboardModels.ViewModel.expectedResult(from: input)
+        try testMapper(
+            DashboardViewModelMapper.self,
+            withInput: input,
+            producesOutput: expectedOutput
+        )
+    }
+
+    func testQuasarStatusSupplyingEnergy() throws {
+        let quasarsEnergySource = DashboardModels.EnergySource.any
+        let input = DashboardModels.Data(
+            quasarsEnergyResume: .any,
+            liveData: .any(quasarStatus: .supplyingEnergy(quasarsEnergySource))
+        )
+        let expectedOutput = DashboardModels.ViewModel.quasarStatusSupplyingEnergy(
+            from: input,
+            quasarEnergySource: quasarsEnergySource
+        )
         try testMapper(
             DashboardViewModelMapper.self,
             withInput: input,
@@ -29,20 +49,7 @@ final class DashboardViewModelMapperTests: XCTestCase {
 private extension DashboardModels.ViewModel {
     static func expectedResult(from data: DashboardModels.Data) -> Self {
         .init(
-            gaugeInfo: [
-                .init(infoText: "dashboard_quasars_supplying".localized,
-                      value: normalizePercentageTo1(
-                        data.quasarsEnergyResume.suppliedEnergyPercentage
-                      ),
-                      valueText: measurementToText(data.quasarsEnergyResume.suppliedEnergy),
-                      style: .primary),
-                .init(infoText: "dashboard_quasars_consuming".localized,
-                      value: normalizePercentageTo1(
-                        data.quasarsEnergyResume.consumedEnergyPercentage
-                      ),
-                      valueText: measurementToText(data.quasarsEnergyResume.consumedEnergy),
-                      style: .red)
-            ],
+            gaugeInfo: .guageInfoVMs(for: data),
             liveSessionVM: .init(
                 titleText: "dashboard_live_session_title".localized,
                 sourcePower1VM: .solarPower(data.liveData.solarPower),
@@ -61,6 +68,32 @@ private extension DashboardModels.ViewModel {
             )
         )
     }
+
+    static func quasarStatusSupplyingEnergy(
+            from data: DashboardModels.Data,
+            quasarEnergySource: DashboardModels.EnergySource
+        ) -> Self {
+            .init(
+                gaugeInfo: .guageInfoVMs(for: data),
+                liveSessionVM: .init(
+                    titleText: "dashboard_live_session_title".localized,
+                    sourcePower1VM: .solarPower(data.liveData.solarPower),
+                    sourcePower2VM: .quasarSupplyingEnergy(quasarEnergySource),
+                    sourcePower3VM: .gridPower(data.liveData.gridPower),
+                    totalPowerVM: .buildingDemandPower(data.liveData.buildingDemandPower)
+                ),
+                liveStatsVM: .init(
+                    titleText: "dashboard_live_sstats_title".localized,
+                    state: .displayGauges(
+                        gaugeVMs: [
+                            .solarPower(data.liveData.solarPower),
+                            .quasarSupplyingEnergy(quasarEnergySource),
+                            .gridPower(data.liveData.gridPower)
+                        ]
+                    )
+                )
+            )
+        }
 }
 
 private extension VerticalLabelsStackViewModel {
@@ -119,6 +152,25 @@ private extension GaugeInfoViewViewModel {
             valueText: percentageToText(data.suppliedPercentage),
             style: .white
         )
+    }
+}
+
+private extension Array where Element == GaugeInfoViewViewModel {
+    static func guageInfoVMs(for data: DashboardModels.Data) -> Self {
+        [
+            .init(infoText: "dashboard_quasars_supplying".localized,
+                  value: normalizePercentageTo1(
+                    data.quasarsEnergyResume.suppliedEnergyPercentage
+                  ),
+                  valueText: measurementToText(data.quasarsEnergyResume.suppliedEnergy),
+                  style: .primary),
+            .init(infoText: "dashboard_quasars_consuming".localized,
+                  value: normalizePercentageTo1(
+                    data.quasarsEnergyResume.consumedEnergyPercentage
+                  ),
+                  valueText: measurementToText(data.quasarsEnergyResume.consumedEnergy),
+                  style: .red)
+        ]
     }
 }
 

@@ -36,63 +36,6 @@ extension CustomMeasurement: Comparable {
     }
 }
 
-// MARK: - AdditiveArithmetic
-extension CustomMeasurement: AdditiveArithmetic {
-    public static func + (lhs: CustomMeasurement<Unit>,
-                          rhs: CustomMeasurement<Unit>) -> CustomMeasurement<Unit> {
-        .init(lhs.value + rhs.value)
-    }
-
-    public static func + (lhs: CustomMeasurement<Unit>,
-                          rhs: Double) -> CustomMeasurement<Unit> {
-        .init(lhs.value + rhs)
-    }
-
-    public static func + (lhs: Double,
-                          rhs: CustomMeasurement<Unit>) -> CustomMeasurement<Unit> {
-        .init(lhs + rhs.value)
-    }
-
-    public static func - (lhs: CustomMeasurement<Unit>,
-                          rhs: CustomMeasurement<Unit>) -> CustomMeasurement<Unit> {
-        .init(lhs.value - rhs.value)
-    }
-
-    public static func - (lhs: CustomMeasurement<Unit>,
-                          rhs: Double) -> CustomMeasurement<Unit> {
-        .init(lhs.value - rhs)
-    }
-
-    public static func - (lhs: Double,
-                          rhs: CustomMeasurement<Unit>) -> CustomMeasurement<Unit> {
-        .init(lhs - rhs.value)
-    }
-}
-
-// MARK: - Numeric
-extension CustomMeasurement: Numeric {
-    public typealias Magnitude = Double
-
-    public init?<T>(exactly source: T) where T : BinaryInteger {
-        self.init(source.doubleValue)
-    }
-
-    public var magnitude: Double {
-        value
-    }
-
-    public static func *= (lhs: inout CustomMeasurement<Unit>, rhs: CustomMeasurement<Unit>) {
-        lhs.value *= rhs.value
-    }
-}
-
-// MARK: - Division
-extension CustomMeasurement {
-    public static func / (lhs: inout CustomMeasurement<Unit>, rhs: CustomMeasurement<Unit>) -> CustomMeasurement<Unit> {
-        .init( lhs.value / rhs.value )
-    }
-}
-
 // MARK: - CustomStringConvertible
 extension CustomMeasurement: CustomStringConvertible {
     public var description: String {
